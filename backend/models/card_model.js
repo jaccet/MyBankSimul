@@ -13,15 +13,14 @@ const card={
             return db.query("INSERT INTO card VALUES(?,?,?,?,?,?)",[newCard.card_no,newCard.expiration_date,newCard.state,hashedPin,newCard.CVV,newCard.IBAN_no],callback);
         });
     },
-    updateStudent(cardnumber,updateData, callback){
+    updateCard(cardnumber,updateData, callback){
         bcrypt.hash(updateData.pin_no,10,function(err,hashedPin){
-            return db.query("UPDATE card SET card_no=?, expiration_date=?, state=?, pin_no=?, CVV=?, IBAN_no=? WHERE cardNumber=?",[cardnumber, updateData.expiration_date, updateData.state, hashedPin, updateData.CVV, updateData.IBAN_no],callback);
+            return db.query("UPDATE card SET card_no=?, expiration_date=?, state=?, pin_no=?, CVV=?, IBAN_no=? WHERE card_no=?",[updateData.card_no, updateData.expiration_date, updateData.state, hashedPin, updateData.CVV, updateData.IBAN_no,cardnumber],callback);
         });
     },
     deleteCard(cardnumber, callback){
-        return db.query("SELECT FROM card WHERE card_no=?",[cardnumber],callback);
-    
-    },
+        return db.query("DELETE FROM card WHERE card_no=?",[cardnumber],callback);
+    }
 }
 
 module.exports=card;

@@ -42,6 +42,16 @@ router.put('/:card_no',function(request,response){
     });
 });
 
+router.put('/singleparam/:card_no',function(request,response){
+    card.updateCardParam(request.params.card_no,request.body,function(err, result){
+        if(err) {
+            response.send(err);
+        } else {
+            response.json(result);
+        }
+    });
+});
+
 router.delete('/:card_no',function(request,response){
     card.deleteCard(request.params.card_no,function(err,result){
         if(err){

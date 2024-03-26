@@ -16,7 +16,7 @@ router.get('/', function(request, response) {
 });
 
 router.get('/:username', function(request,response){
-    user.getOneUser(request.params.username, function(err,result){
+    user.GetOneUser(request.params.username, function(err,result){
         if(err){
             response.json(err.errno);
         }
@@ -48,7 +48,6 @@ router.put('/:username', function(request,response){
             response.json(result.affectedRows);
         }
     });
-
 });
 
 router.delete('/:username',function(request,response){
@@ -62,18 +61,5 @@ router.delete('/:username',function(request,response){
         }
     });
 });
-
-router.put('/updateuserdetails/:username', function(request,response){
-    user.updateUserDetails(request.body, request.params.username, function(err, result){
-        if(err){
-            response.send(err);
-        }
-        else{
-            console.log(result.affectedRows);
-            response.json(result.affectedRows);
-        }
-    });
-});
-
 
 module.exports=router;

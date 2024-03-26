@@ -26,33 +26,7 @@ const user={
 			[updateData.fname, updateData.lname, updateData.email, updateData.phone_no, updateData.address, hashedPassword, username],callback);
 		});
 	},
-	/* VANHA METODI
-	updateFname(updateData, username, callback) {
-		return db.query('UPDATE user SET fname=? WHERE username=?',[updateData.fname, username],callback);
-	},
 
-	updateLname(updateData, username, callback) {
-		return db.query('UPDATE user SET lname=? WHERE username=?',[updateData.lname, username],callback);
-	},
-
-	updateEmail(updateData, username, callback) {
-		return db.query('UPDATE user SET email=? WHERE username=?',[updateData.email, username],callback);
-	},
-
-	updatePhone_no(updateData, username, callback) {
-		return db.query('UPDATE user SET phone_no=? WHERE username=?',[updateData.phone_no, username],callback);
-	},
-
-	updateAddress(updateData, username, callback) {
-		return db.query('UPDATE user SET address=? WHERE username=?',[updateData.address, username],callback);
-	},
-
-	updatePassword(updateData, username, callback) {
-		bcrypt.hash(updateData.password,10,function(err,hashedPassword){
-			return db.query('UPDATE user SET password=? WHERE username=?',[hashedPassword, username],callback);
-		});
-	},
-	*/
 	deleteUser(username,callback){
 		return db.query('DELETE FROM user WHERE username=?',[username], callback)
 	},

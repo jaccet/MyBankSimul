@@ -5,4 +5,5 @@ const connection = mysql.createPool({
   password: 'putin1234',
   database: 'bankSimul'
 });
+
 module.exports = connection;

@@ -1,9 +1,9 @@
-var mysql = require('mysql2');
-var connection = mysql.createConnection({
-  host: "localhost",
-  user: "bankAdmin",
-  password: "putin1234",
-  database: 'banksimul'
+const mysql = require('mysql2');
+const connection = mysql.createPool({
+  host: '127.0.0.1',
+  user: 'bankAdmin',
+  password: 'putin1234',
+  database: 'bankSimul'
 });
 
 module.exports = connection;

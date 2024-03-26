@@ -3,7 +3,7 @@ const router=express.Router();
 const transaction=require('../models/transaction_model.js');
 
 router.get('/',function(request, response){
-    student.getAllTransaction(function(err, result){
+    transaction.getAllTransaction(function(err, result){
         if(err){
             response.send(err);
         }
@@ -14,8 +14,8 @@ router.get('/',function(request, response){
     });
 });
 
-router.get('/:usern',function(request,response){
-    student.getOneTransaction(request.params.usern, function(err,result){
+router.get('/:idtransaction',function(request,response){
+    transaction.getOneTransaction(request.params.idtransaction, function(err,result){
         if(err){
             response.send(err);
         }
@@ -26,38 +26,35 @@ router.get('/:usern',function(request,response){
     })
 });
 
-router.post('/',function(request, response){
-    student.addTransaction(request.body, function(err, result){
+router.post('/:iban_n',function(request, response){
+    transaction.addTransaction(request.body, request.params.iban_n, function(err, result){
         if(err){
             response.send(err);
         }
         else{
             response.json(result);
-            //response.send(result[0].affectedRows)
         }
     });
 });
 
-router.put('/:usern', function(request, response){
-    student.updateTransaction(request.params.usern, request.body, function(err, result){
+router.put('/', function(request, response){
+    transaction.updateTransaction(request.body, function(err, result){
         if(err){
             response.send(err);
         }
         else{
-            //response.json(result);
             console.log(result.affectedRows);
             response.json(result.affectedRows);
         }
     });
 });
 
-router.delete('/:usern',function(request, response){
-    student.deleteTransaction(request.params.usern, function(err, result){
+router.delete('/:idtransaction',function(request, response){
+    transaction.deleteTransaction(request.params.idtransaction, function(err, result){
         if(err){
             response.send(err);
         }
         else{
-            //response.json(result);
             console.log(result.affectedRows);
             response.json(result.affectedRows);
         }

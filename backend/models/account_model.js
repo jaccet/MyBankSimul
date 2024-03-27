@@ -22,11 +22,11 @@ const account={
             return db.query('UPDATE account SET credit_limit=? WHERE IBAN_no=?',
             [updateAcData.credit_limit, iban],callback);
         }
-        else if(updateAcData.balance){
+        if(updateAcData.balance){
             return db.query('UPDATE account SET balance=? WHERE IBAN_no=?',
             [updateAcData.balance, iban],callback);
         }
-        else if(updateAcData.interest){
+        if(updateAcData.interest){
             return db.query('UPDATE account SET interest=? WHERE IBAN_no=?',
             [updateAcData.interest, iban],callback);
         }

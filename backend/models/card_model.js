@@ -19,8 +19,22 @@ const card={
         });
     },
     updateCardParam(cardnumber,updateData, callback){
+        if(updateData.card_no) {
+            db.query("UPDATE card SET card_no=? WHERE card_no=?",[updateData.card_no,cardnumber]);
+        }
         if(updateData.expiration_date) {
             return db.query("UPDATE card SET expiration_date=? WHERE card_no=?",[updateData.expiration_date,cardnumber],callback);
+        }
+        if(updateData.state) {
+            return db.query("UPDATE card SET state=? WHERE card_no=?",[updateData.state,cardnumber],callback);
+        }
+        if(updateData.pin_no) {
+            bcrypt.hash(updateData.pin_no,10,function(err,hashedPin){
+                return db.query("UPDATE card SET pin_no=? WHERE card_no=?",[updateData.pin_no,cardnumber],callback);
+            });
+        }
+        if(updateData.CVV) {
+            return db.query("UPDATE card SET CVV=? WHERE card_no=?",[updateData.CVV,cardnumber],callback);
         }
     },
     deleteCard(cardnumber, callback){

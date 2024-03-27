@@ -42,27 +42,27 @@ const user={
 			[updateData.fname, username], callback);
 		}
 		
-		else if (updateData.lname) {
+		if (updateData.lname) {
 			return db.query('UPDATE user SET lname=? WHERE username=?',
 			[updateData.lname, username], callback);
 		}
 		
-		else if (updateData.email) {
+		if (updateData.email) {
 			return db.query('UPDATE user SET email=? WHERE username=?',
 			[updateData.email, username], callback);
 		}
 		
-		else if (updateData.phone_no) {
+		if (updateData.phone_no) {
 			return db.query('UPDATE user SET phone_no=? WHERE username=?',
 			[updateData.phone_no, username], callback);
 		}
 		
-		else if (updateData.address) {
+		if (updateData.address) {
 			return db.query('UPDATE user SET address=? WHERE username=?',
 			[updateData.address, username], callback);
 		}
 		
-		else if (updateData.password) {
+		if (updateData.password) {
 			bcrypt.hash(updateData.password,10,function(err,hashedPassword){
 				return db.query('UPDATE user SET password=? WHERE username=?',
 				[hashedPassword, username], callback);

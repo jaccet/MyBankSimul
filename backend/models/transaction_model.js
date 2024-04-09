@@ -4,6 +4,9 @@ const transaction={
     getAllTransaction(callback){
         return db.query("SELECT * FROM transaction",callback);
     },
+    getAllTransactionByIbanJoinCard(card_no,callback){
+        return db.query("select transaction.idtransaction,transaction.type,transaction.date,transaction.amount from card c join account a on c.IBAN_no=a.IBAN_no join transaction on a.IBAN_no=transaction.IBAN_no where card_no=?",[card_no],callback);
+    },
     getOneTransaction(idtransaction, callback){
         return db.query("SELECT * FROM transaction WHERE idtransaction=?",[idtransaction],callback);
     },

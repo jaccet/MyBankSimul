@@ -14,6 +14,18 @@ router.get('/',function(request, response){
     });
 });
 
+router.get('/:card_no',function(request, response){
+    transaction.getAllTransactionByIbanJoinCard(request.params.card_no,function(err, result){
+        if(err){
+            response.send(err);
+        }
+        else{
+            console.log(result);
+            response.json(result);
+        }
+    });
+});
+
 router.get('/:idtransaction',function(request,response){
     transaction.getOneTransaction(request.params.idtransaction, function(err,result){
         if(err){

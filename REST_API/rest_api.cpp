@@ -8,51 +8,31 @@ REST_API::~REST_API()
 {
 }
 
-void REST_API::loginHandler(QString cardnumber, QString pin)
+void REST_API::checkCard(QString cardnumber)
 {
-    card_no = cardnumber;
+    card_no=cardnumber;
 
-    QJsonObject jsonObj;
+    QString site_url=base_url+"login/"+card_no;
 
-    jsonObj.insert("card_no",card_no);
-    jsonObj.insert("pin_no",pin);
+    QNetworkRequest request(site_url);
 
-    QString site_url = base_url+"login";
-    QNetworkRequest request;
-    request.setUrl(site_url);
-    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+    loginManager = new QNetworkAccessManager(this);
 
-    loginManager = new QNetworkAccessManager();
-    connect(loginManager,SIGNAL(finished(QNetworkReply*)),this,SLOT(loginEvent(QNetworkReply*)));
+    connect(loginManager,SIGNAL(finished(QNetworkReply*)),this,SLOT(cardSlot(QNetworkReply*)));
 
-    reply = loginManager->post(request, QJsonDocument(jsonObj).toJson());
+    reply=loginManager->get(request);
 }
 
-
-
-bool REST_API::loginEvent(QNetworkReply *reply)
+void REST_API::cardSlot(QNetworkReply *reply)
 {
-    responseData=reply->readAll();
-    //QMessageBox msgBox;
-    qDebug()<<responseData;
-    if(responseData=="-4078" || responseData.length()==0){
-        //msgBox.setText("Virhe tietoyhteydessä");
-        //msgBox.exec();
+    responseData = reply->readAll();
 
+    if (responseData == "false") {
+        emit cardChecked(false);
     } else {
-        if(responseData!="false"){
-            //kirjautuminen onnistui
-            webtoken = responseData;
-            qDebug()<<responseData;
-            ui->pushButton->setEnabled(true);
-        }
-        else{
-            msgBox.setText("Tunnus/salasana ei täsmää");
-            msgBox.exec();
-            //ui->textUsername->clear();
-            //ui->pin_noLine->clear();
-        }
+        emit cardChecked(true);
     }
     reply->deleteLater();
     loginManager->deleteLater();
 }
+

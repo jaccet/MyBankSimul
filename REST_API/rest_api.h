@@ -14,11 +14,13 @@ class REST_API_EXPORT REST_API : public QObject
 public:
     REST_API();
     ~REST_API();
-
+    void checkCard(QString cardnumber);
+public slots:
+    void cardSlot(QNetworkReply *reply);
 private slots:
 
 signals:
-
+    bool cardChecked(bool);
 private:
     QString base_url="http://localhost:3000/";
     QNetworkAccessManager *loginManager;

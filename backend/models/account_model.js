@@ -12,6 +12,10 @@ const account={
         [iban],callback);
     },
 
+    getAccountInfoByCard(card_no,callback){
+        return db.query('SELECT balance,interest,credit_limit,type FROM card c JOIN account a ON c.IBAN_no=a.IBAN_no WHERE card_no=?',[card_no],callback);
+    },
+
     addAccount(newAcData,callback){
         return db.query("INSERT INTO account (IBAN_no, BIC, interest, balance, type, credit_limit) VALUES (?,?,?,?,?,?)",
         [newAcData.IBAN_no, newAcData.BIC, newAcData.interest, newAcData.balance, newAcData.type, newAcData.credit_limit],callback);

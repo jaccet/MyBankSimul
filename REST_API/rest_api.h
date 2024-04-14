@@ -6,7 +6,6 @@
 #include <QObject>
 #include <QtNetwork/QNetworkAccessManager>
 #include <QJsonDocument>
-//#include <QMessageBox>
 
 class REST_API_EXPORT REST_API : public QObject
 {
@@ -15,32 +14,35 @@ public:
     REST_API();
     ~REST_API();
     void checkCard(QString cardnumber);
-    void checkTransaction(QString transaction);
-    void checkAccount(QString account);
-    void checkUser(QString user);
+    void requestLogin(QString pin);
+    void setCard_no(const QString &newCard_no);
+    void getTransactions();
+    void getAccountLogistics();
+    void withdrawalOperation();
 public slots:
-    void cardSlot(QNetworkReply *reply);
-    void transactionSlot(QNetworkReply *reply);
-    void accountSlot(QNetworkReply *reply);
-    void userSlot(QNetworkReply *reply);
 private slots:
-
+    void cardSlot(QNetworkReply *reply);
+    void loginSlot(QNetworkReply *reply);
+    void transactionSlot(QNetworkReply *reply);
+    void accountLogisticSlot(QNetworkReply *reply);
+    void withdrawalSlot(QNetworkReply *reply);
+    void IBANSlot(QNetworkReply *reply);
 signals:
     bool cardChecked(bool);
-    bool transactionChecked(bool);
-    bool accountChecked(bool);
-    bool userChecked(bool);
+    bool loginSuccessful(bool);
+    QJsonObject transactionInfoReceived(QJsonObject);
+    QJsonObject accountLogisticsReceived(QJsonObject);
 private:
     QString base_url="http://localhost:3000/";
     QNetworkAccessManager *loginManager;
-    QNetworkAccessManager *transactionManager;
+    QNetworkAccessManager *infoManager;
     QNetworkReply *reply;
     QByteArray responseData;
     QString card_no;
-    QString idtransaction;
-    QString IBAN_no;
-    QString username;
+    QString IBAN;
     QByteArray webtoken;
+
+    void getAndSetAccountIBAN();
 };
 
 #endif // REST_API_H

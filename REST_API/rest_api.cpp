@@ -10,7 +10,7 @@ REST_API::~REST_API()
 
 void REST_API::checkCard(QString cardnumber)
 {
-    card_no=cardnumber;
+    setCard_no(cardnumber);
 
     QString site_url=base_url+"login/"+card_no;
 
@@ -21,6 +21,22 @@ void REST_API::checkCard(QString cardnumber)
     connect(loginManager,SIGNAL(finished(QNetworkReply*)),this,SLOT(cardSlot(QNetworkReply*)));
 
     reply=loginManager->get(request);
+}
+
+void REST_API::requestLogin(QString pin)
+{
+    QJsonObject jsonObj;
+    jsonObj.insert("card_no",card_no);
+    jsonObj.insert("pin_no",pin);
+
+    QString site_url=base_url+"login";
+    QNetworkRequest request((site_url));
+    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+
+    loginManager = new QNetworkAccessManager(this);
+    connect(loginManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(loginSlot(QNetworkReply*)));
+
+    reply = loginManager->post(request, QJsonDocument(jsonObj).toJson());
 }
 
 void REST_API::cardSlot(QNetworkReply *reply)
@@ -36,93 +52,117 @@ void REST_API::cardSlot(QNetworkReply *reply)
     loginManager->deleteLater();
 }
 
-/////////////////////////////////////////////
-
-void REST_API::checkTransaction(QString transaction)
+void REST_API::loginSlot(QNetworkReply *reply)
 {
-    idtransaction=transaction;
+    responseData=reply->readAll();
 
-    QString site_url=base_url+"login/"+idtransaction;
+    if(responseData=="-4078" || responseData.length()==0){
 
-    QNetworkRequest request(site_url);
+        qDebug()<<"Connection Error!";
+        emit loginSuccessful(false);
+    }
+    else{
+        if(responseData!="false"){
+            //kirjautuminen onnistui
+            webtoken=responseData;
+            emit loginSuccessful(true);
+        }
+        else{
+            qDebug()<<"Wrong Card or Pin";
+            emit loginSuccessful(false);
+        }
+    }
 
-    loginManager = new QNetworkAccessManager(this);
+    getAndSetAccountIBAN();
 
-    connect(loginManager,SIGNAL(finished(QNetworkReply*)),this,SLOT(transactionSlot(QNetworkReply*)));
-
-    reply=loginManager->get(request);
+    reply->deleteLater();
+    loginManager->deleteLater();
 }
 
 void REST_API::transactionSlot(QNetworkReply *reply)
 {
-    responseData = reply->readAll();
-
-    if (responseData == "false") {
-        emit transactionChecked(false);
-    } else {
-        emit transactionChecked(true);
-    }
+    responseData=reply->readAll();
+    //qDebug()<<response_data;
+    QJsonDocument json_doc = QJsonDocument::fromJson(responseData);
+    QJsonObject json_obj = json_doc.object();
+    qDebug()<<json_obj;
+    emit transactionInfoReceived(json_obj);
     reply->deleteLater();
-    loginManager->deleteLater();
+    infoManager->deleteLater();
 }
 
-//////////////////////////////////////////
-
-void REST_API::checkAccount(QString account)
+void REST_API::accountLogisticSlot(QNetworkReply *reply)
 {
-    IBAN_no=account;
-
-    QString site_url=base_url+"login/"+IBAN_no;
-
-    QNetworkRequest request(site_url);
-
-    loginManager = new QNetworkAccessManager(this);
-
-    connect(loginManager,SIGNAL(finished(QNetworkReply*)),this,SLOT(accountSlot(QNetworkReply*)));
-
-    reply=loginManager->get(request);
-}
-
-void REST_API::accountSlot(QNetworkReply *reply)
-{
-    responseData = reply->readAll();
-
-    if (responseData == "false") {
-        emit accountChecked(false);
-    } else {
-        emit accountChecked(true);
-    }
+    responseData=reply->readAll();
+    //qDebug()<<response_data;
+    QJsonDocument json_doc = QJsonDocument::fromJson(responseData);
+    QJsonObject json_obj = json_doc.object();
+    qDebug()<<json_obj;
+    emit accountLogisticsReceived(json_obj);
     reply->deleteLater();
-    loginManager->deleteLater();
+    infoManager->deleteLater();
 }
 
-//////////////////////////////////////////
-
-void REST_API::checkUser(QString user)
+void REST_API::IBANSlot(QNetworkReply *reply)
 {
-    username=user;
-
-    QString site_url=base_url+"login/"+username;
-
-    QNetworkRequest request(site_url);
-
-    loginManager = new QNetworkAccessManager(this);
-
-    connect(loginManager,SIGNAL(finished(QNetworkReply*)),this,SLOT(userSlot(QNetworkReply*)));
-
-    reply=loginManager->get(request);
-}
-
-void REST_API::userSlot(QNetworkReply *reply)
-{
-    responseData = reply->readAll();
-
-    if (responseData == "false") {
-        emit userChecked(false);
-    } else {
-        emit userChecked(true);
-    }
+    responseData=reply->readAll();
+    //qDebug()<<response_data;
+    IBAN = responseData;
     reply->deleteLater();
-    loginManager->deleteLater();
+    infoManager->deleteLater();
 }
 
+void REST_API::getAndSetAccountIBAN()
+{
+    QString site_url=base_url+"card/IBAN/"+card_no;
+    QNetworkRequest request((site_url));
+    //WEBTOKEN ALKU
+    QByteArray requestToken="Bearer "+webtoken;
+    request.setRawHeader(QByteArray("Authorization"),(requestToken));
+    //WEBTOKEN LOPPU
+    infoManager = new QNetworkAccessManager(this);
+
+    connect(infoManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(IBANSlot(QNetworkReply*)));
+
+    reply = infoManager->get(request);
+}
+
+void REST_API::setCard_no(const QString &newCard_no)
+{
+    card_no = newCard_no;
+}
+
+void REST_API::getTransactions()
+{
+    QString site_url=base_url+"transaction/"+card_no;
+    QNetworkRequest request((site_url));
+    //WEBTOKEN ALKU
+    QByteArray requestToken="Bearer "+webtoken;
+    request.setRawHeader(QByteArray("Authorization"),(requestToken));
+    //WEBTOKEN LOPPU
+    infoManager = new QNetworkAccessManager(this);
+
+    connect(infoManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(transactionSlot(QNetworkReply*)));
+
+    reply = infoManager->get(request);
+}
+
+void REST_API::getAccountLogistics()
+{
+    QString site_url=base_url+"account/"+card_no;
+    QNetworkRequest request((site_url));
+    //WEBTOKEN ALKU
+    QByteArray requestToken="Bearer "+webtoken;
+    request.setRawHeader(QByteArray("Authorization"),(requestToken));
+    //WEBTOKEN LOPPU
+    infoManager = new QNetworkAccessManager(this);
+
+    connect(infoManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(accountLogisticSlot(QNetworkReply*)));
+
+    reply = infoManager->get(request);
+}
+
+void REST_API::withdrawalOperation()
+{
+
+}

@@ -21,6 +21,8 @@ pinUI::pinUI(QWidget *parent) :
 pinUI::~pinUI()
 {
     delete ui;
+    delete apiObject;
+    apiObject=nullptr;
     ui=nullptr;
 }
 
@@ -62,23 +64,31 @@ void pinUI::clrEntBckClickedHandler()
     if(button2->objectName() == "buttonEnter")
     {
         //TÄHÄN SIGNAALI
-        emit sendPinNumToMain(number);
-        if(number != testipinkoodi){
-            qDebug() << "mönkään meni";
-            switchFontSize(10);
-            numOftries--;
-            ui->infoScreen->setText(tr("Wrong PIN. Try again.\n Tries left : %1").arg(numOftries));
-            number=NULL;
-            starCount=NULL;
-            lockHandler();
-        }
-        else if(number == testipinkoodi){
-            qDebug() << "oikein?";
-            isCorrect = true;
-            ui->infoScreen->setText("Correct!");
-            lockHandler();
-            QTimer::singleShot(5000, this, SLOT(reEnableOrClose()));
-        }
+        //emit sendPinNumToMain(number);
+        qDebug() << "enteriä painettu";
+        apiObject = new REST_API;
+        connect(apiObject,SIGNAL(loginSuccessful(bool)),this,SLOT(loginHandler(bool)));
+        apiObject->requestLogin(number);
+    }
+}
+
+void pinUI::loginHandler(bool logResult)
+{
+    if(logResult == false){
+        qDebug() << "mönkään meni";
+        switchFontSize(10);
+        numOftries--;
+        ui->infoScreen->setText(tr("Wrong PIN. Try again.\n Tries left : %1").arg(numOftries));
+        number=NULL;
+        starCount=NULL;
+        lockHandler();
+    }
+    else{
+        qDebug() << "oikein?";
+        isCorrect = true;
+        ui->infoScreen->setText("Correct!");
+        lockHandler();
+        QTimer::singleShot(5000, this, SLOT(reEnableOrClose()));
     }
 }
 

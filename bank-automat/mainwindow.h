@@ -37,7 +37,6 @@ private slots:
     //RFID
     void dataHandler();
     void on_SignalSender_clicked();
-    void openPort();
 
 private:
     Ui::MainWindow *ui;

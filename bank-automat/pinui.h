@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include <QTimer>
+#include "rest_api.h"
 
 namespace Ui {
 class pinUI;
@@ -21,12 +22,14 @@ private slots:
     void numberClickedHandler();
     void clrEntBckClickedHandler();
     void reEnableOrClose();
+    void loginHandler(bool);
 
 signals:
     void sendPinNumToMain(QString);
 
 private:
     //void openSerialPort();
+    REST_API *apiObject;
     Ui::pinUI *ui;
     QString starCount,number;
     QString testipinkoodi="6262";

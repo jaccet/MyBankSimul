@@ -98,9 +98,17 @@ void REST_API::accountLogisticSlot(QNetworkReply *reply)
     QJsonDocument json_doc = QJsonDocument::fromJson(responseData);
     QJsonObject json_obj = json_doc.object();
     qDebug()<<json_obj;
+    balance = json_obj["balance"].toDouble();
     emit accountLogisticsReceived(json_obj);
     reply->deleteLater();
     infoManager->deleteLater();
+}
+
+void REST_API::withdrawalSlot(QNetworkReply *reply)
+{
+    responseData=reply->readAll();
+
+    qDebug()<<responseData;
 }
 
 void REST_API::IBANSlot(QNetworkReply *reply)
@@ -162,7 +170,23 @@ void REST_API::getAccountLogistics()
     reply = infoManager->get(request);
 }
 
-void REST_API::withdrawalOperation()
+void REST_API::withdrawalOperation(double amount)
 {
+    QJsonObject jsonObj;
 
+    balance = balance - amount;
+    jsonObj.insert("balance",balance);
+
+    QString site_url=base_url+"account/upAccount"+IBAN;
+    QNetworkRequest request((site_url));
+    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+    //WEBTOKEN ALKU
+    QByteArray requestToken="Bearer "+webtoken;
+    request.setRawHeader(QByteArray("Authorization"),(requestToken));
+    //WEBTOKEN LOPPU
+    infoManager = new QNetworkAccessManager(this);
+
+    connect(infoManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(withdrawalSlot(QNetworkReply*)));
+
+    reply = infoManager->put(request,QJsonDocument(jsonObj).toJson());
 }

@@ -18,7 +18,7 @@ public:
     void setCard_no(const QString &newCard_no);
     void getTransactions();
     void getAccountLogistics();
-    void withdrawalOperation();
+    void withdrawalOperation(double amount);
 public slots:
 private slots:
     void cardSlot(QNetworkReply *reply);
@@ -41,6 +41,7 @@ private:
     QString card_no;
     QString IBAN;
     QByteArray webtoken;
+    double balance;
 
     void getAndSetAccountIBAN();
 };

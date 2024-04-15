@@ -22,6 +22,16 @@ router.get('/:card_no',function(request,response){
     });
 });
 
+router.get('/IBAN/:card_no',function(request,response){
+    card.getIBAN(request.params.card_no,function(err,result){
+        if(err){
+            response.send(err);
+        } else {
+            response.json(result);
+        }
+    });
+});
+
 router.post('/',function(request,response){
     card.addCard(request.body,function(err,result){
         if(err){

@@ -6,7 +6,6 @@
 #include <QObject>
 #include <QtNetwork/QNetworkAccessManager>
 #include <QJsonDocument>
-//#include <QMessageBox>
 
 class REST_API_EXPORT REST_API : public QObject
 {
@@ -14,19 +13,36 @@ class REST_API_EXPORT REST_API : public QObject
 public:
     REST_API();
     ~REST_API();
-    void checkCard(QString);
+    void checkCard(QString cardnumber);
+    void requestLogin(QString pin);
+    void setCard_no(const QString &newCard_no);
+    void getTransactions();
+    void getAccountLogistics();
+    void withdrawalOperation();
+public slots:
 private slots:
-
+    void cardSlot(QNetworkReply *reply);
+    void loginSlot(QNetworkReply *reply);
+    void transactionSlot(QNetworkReply *reply);
+    void accountLogisticSlot(QNetworkReply *reply);
+    void withdrawalSlot(QNetworkReply *reply);
+    void IBANSlot(QNetworkReply *reply);
 signals:
-
+    bool cardChecked(bool);
+    bool loginSuccessful(bool);
+    QJsonObject transactionInfoReceived(QJsonObject);
+    QJsonObject accountLogisticsReceived(QJsonObject);
 private:
     QString base_url="http://localhost:3000/";
     QNetworkAccessManager *loginManager;
-    QNetworkAccessManager *transactionManager;
+    QNetworkAccessManager *infoManager;
     QNetworkReply *reply;
     QByteArray responseData;
     QString card_no;
+    QString IBAN;
     QByteArray webtoken;
+
+    void getAndSetAccountIBAN();
 };
 
 #endif // REST_API_H

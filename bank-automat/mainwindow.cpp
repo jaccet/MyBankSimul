@@ -6,14 +6,6 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
-    serialPort = new QSerialPort(this);
-    serialPort->setPortName("COM3");
-    serialPort->setBaudRate(QSerialPort::Baud9600);
-    serialPort->setDataBits(QSerialPort::Data8);
-    serialPort->setParity(QSerialPort::NoParity);
-    serialPort->setStopBits(QSerialPort::OneStop);
-    serialPort->setFlowControl(QSerialPort::NoFlowControl);
-
     ui->setupUi(this);
     connect(ui->INSERT_CARD_BT,SIGNAL(clicked(bool)),
             this,SLOT(handleInserCardClick()));
@@ -50,9 +42,6 @@ void MainWindow::handleInserCardClick()
         qDebug() << "Aku Ankka";
         serialPort->close();
     }
-
-
-    /*qDebug()<<"handleInsertCardClick funktiossa";
     readerPtr = new cardReader(this);
     connect(readerPtr,SIGNAL(sendCardNumToMain(short)),
             this,SLOT(handleCardNumberRead(short)));

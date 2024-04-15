@@ -8,6 +8,9 @@ const card={
     getOneCard(cardnumber,callback){
         return db.query("SELECT * FROM card where card_no=?",[cardnumber],callback);
     },
+    getIBAN(cardnumber,callback){
+        return db.query("SELECT IBAN_no from card WHERE card_no=?",[cardnumber],callback);
+    },
     addCard(newCard, callback){
         bcrypt.hash(newCard.pin_no,10,function(err,hashedPin){
             return db.query("INSERT INTO card VALUES(?,?,?,?,?,?)",[newCard.card_no,newCard.expiration_date,newCard.state,hashedPin,newCard.CVV,newCard.IBAN_no],callback);

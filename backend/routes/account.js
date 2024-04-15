@@ -25,6 +25,16 @@ router.get('/:iban',function(request, response){
     });
 });
 
+router.get('/:card_no',function(request,response){
+    account.getAccountInfoByCard(request.params.card_no,function(err,result){
+        if(err){
+            response.send(err);
+        } else {
+            request.json(result);
+        }
+    });
+});
+
 router.post('/',function(request, response){
     account.addAccount(request.body, function(err,result){
         if(err){

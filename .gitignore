@@ -2,3 +2,5 @@ backend/node_modules/
 backend/.env
 bank-automat/build/
 bank-automat/*.user
+
+REST_API/*.user

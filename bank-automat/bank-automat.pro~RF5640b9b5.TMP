@@ -1,4 +1,4 @@
-QT       += core gui serialport
+QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -13,27 +13,25 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     pankkisivu.cpp \
-    pinui.cpp
+    pinui.cpp \
+    pinuitest.cpp
 
 HEADERS += \
     cardreader.h \
     mainwindow.h \
     pankkisivu.h \
-    pinui.h
+    pinui.h \
+    pinuitest.h \
+    pinuitester.h
 
 FORMS += \
     cardreader.ui \
     mainwindow.ui \
     pankkisivu.ui \
-    pinui.ui
+    pinui.ui \
+    pinuitest.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
-
-win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../REST_API/build/release/ -lREST_API
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../REST_API/build/debug/ -lREST_API
-
-INCLUDEPATH += $$PWD/../REST_API
-DEPENDPATH += $$PWD/../REST_API

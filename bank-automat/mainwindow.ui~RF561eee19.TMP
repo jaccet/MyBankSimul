@@ -23,9 +23,6 @@
          <layout class="QHBoxLayout" name="horizontalLayout">
           <item>
            <widget class="QPushButton" name="INSERT_CARD_BT">
-            <property name="enabled">
-             <bool>true</bool>
-            </property>
             <property name="palette">
              <palette>
               <active>
@@ -176,6 +173,10 @@
           </property>
           <property name="text">
            <string>LOGIN</string>
+          </property>
+          <property name="icon">
+           <iconset>
+            <normaloff>C:/Users/OMISTAJA/Downloads/sticker,375x360-bg,ffffff.u10.png</normaloff>C:/Users/OMISTAJA/Downloads/sticker,375x360-bg,ffffff.u10.png</iconset>
           </property>
          </widget>
         </item>

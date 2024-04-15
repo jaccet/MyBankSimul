@@ -6,14 +6,6 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
-    serialPort = new QSerialPort(this);
-    serialPort->setPortName("COM3");
-    serialPort->setBaudRate(QSerialPort::Baud9600);
-    serialPort->setDataBits(QSerialPort::Data8);
-    serialPort->setParity(QSerialPort::NoParity);
-    serialPort->setStopBits(QSerialPort::OneStop);
-    serialPort->setFlowControl(QSerialPort::NoFlowControl);
-
     ui->setupUi(this);
     connect(ui->INSERT_CARD_BT,SIGNAL(clicked(bool)),
             this,SLOT(handleInserCardClick()));
@@ -23,42 +15,8 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete ui;
-    serialPort->close();
     ui=nullptr;
 }
-//RFID
-/*void MainWindow::dataHandler(){
-
-    QByteArray rD = serialPort->readAll();
-    qDebug() << rD;
-    userid=rD;
-    // ui->tekstiboksi->setText(rD);
-    userid.remove(0,7);
-    userid.chop(3);
-    qDebug() << userid;
-
-    if (userid.startsWith("CB1")){
-        ui->SignalSender->animateClick();
-        QString name="Mikki Hiiri";
-        qDebug() << "mikki hiiri";
-        serialPort->close();
-    }
-    if (userid.startsWith("CAA")){
-        ui->SignalSender->animateClick();
-        QString name="Aku Ankka";
-        qDebug() << "Aku Ankka";
-        serialPort->close();
-    }
-}
-
-void MainWindow::on_SignalSender_clicked()
-{
-    ui->setupUi(this);
-    pinpointer = new Pinuitest(this);
-    ui->SignalSender->deleteLater();
-    pinpointer->show();
-
-}*/
 
 void MainWindow::handleInserCardClick()
 {
@@ -68,6 +26,10 @@ void MainWindow::handleInserCardClick()
     connect(readerPtr,SIGNAL(sendCardNumToMain(short)),
             this,SLOT(handleCardNumberRead(short)));
     readerPtr->show();
+    //PIN
+    pinUI *pinUIObject = new pinUI(this);
+    connect(pinUIObject,SIGNAL(sendPinNumToMain(QString)),this,SLOT(handlePinNumberRead(QString)));
+    pinUIObject->open();
 }
     //PIN
 void MainWindow::handlePinNumberRead(QString numero)
@@ -91,5 +53,4 @@ void MainWindow::on_LoginBT_clicked()
     pankkiPtr->show();
     close();
 }
-
 

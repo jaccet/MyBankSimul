@@ -27,7 +27,7 @@ MainWindow::~MainWindow()
     ui=nullptr;
 }
 //RFID
-/*void MainWindow::dataHandler(){
+void MainWindow::dataHandler(){
 
     QByteArray rD = serialPort->readAll();
     qDebug() << rD;
@@ -38,27 +38,27 @@ MainWindow::~MainWindow()
     qDebug() << userid;
 
     if (userid.startsWith("CB1")){
-        ui->SignalSender->animateClick();
+        ui->INSERT_CARD_BT->animateClick();
         QString name="Mikki Hiiri";
         qDebug() << "mikki hiiri";
         serialPort->close();
     }
     if (userid.startsWith("CAA")){
-        ui->SignalSender->animateClick();
+        ui->INSERT_CARD_BT->animateClick();
         QString name="Aku Ankka";
         qDebug() << "Aku Ankka";
         serialPort->close();
     }
 }
 
-void MainWindow::on_SignalSender_clicked()
+void MainWindow::on_INSERT_CARD_BT_clicked()
 {
     ui->setupUi(this);
     pinpointer = new Pinuitest(this);
-    ui->SignalSender->deleteLater();
+    ui->INSERT_CARD_BT->deleteLater();
     pinpointer->show();
 
-}*/
+}
 
 void MainWindow::handleInserCardClick()
 {

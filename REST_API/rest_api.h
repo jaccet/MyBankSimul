@@ -14,7 +14,7 @@ class REST_API_EXPORT REST_API : public QObject
 public:
     REST_API();
     ~REST_API();
-
+    void checkCard(QString);
 private slots:
 
 signals:

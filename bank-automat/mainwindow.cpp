@@ -27,8 +27,9 @@ MainWindow::~MainWindow()
     ui=nullptr;
 }
 //RFID
-void MainWindow::dataHandler(){
-
+void MainWindow::handleInserCardClick()
+{
+    //RFID
     QByteArray rD = serialPort->readAll();
     qDebug() << rD;
     userid=rD;
@@ -49,25 +50,13 @@ void MainWindow::dataHandler(){
         qDebug() << "Aku Ankka";
         serialPort->close();
     }
-}
 
-void MainWindow::on_INSERT_CARD_BT_clicked()
-{
-    ui->setupUi(this);
-    pinpointer = new Pinuitest(this);
-    ui->INSERT_CARD_BT->deleteLater();
-    pinpointer->show();
 
-}
-
-void MainWindow::handleInserCardClick()
-{
-    //RFID
-    qDebug()<<"handleInsertCardClick funktiossa";
+    /*qDebug()<<"handleInsertCardClick funktiossa";
     readerPtr = new cardReader(this);
     connect(readerPtr,SIGNAL(sendCardNumToMain(short)),
             this,SLOT(handleCardNumberRead(short)));
-    readerPtr->show();
+    readerPtr->show();*/
 }
     //PIN
 void MainWindow::handlePinNumberRead(QString numero)
@@ -91,5 +80,3 @@ void MainWindow::on_LoginBT_clicked()
     pankkiPtr->show();
     close();
 }
-
-

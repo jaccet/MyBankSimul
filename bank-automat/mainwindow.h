@@ -35,9 +35,6 @@ private slots:
     void handlePinNumberRead(QString);
     void on_LoginBT_toggled(bool checked);
     //RFID
-    void dataHandler();
-    void on_SignalSender_clicked();
-
 private:
     Ui::MainWindow *ui;
     short cardNumber;

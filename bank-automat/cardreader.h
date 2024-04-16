@@ -2,6 +2,7 @@
 #define CARDREADER_H
 
 #include <QDialog>
+#include "pinui.h"
 
 namespace Ui {
 class cardReader;
@@ -25,6 +26,7 @@ signals:
 
 private:
     Ui::cardReader *ui;
+    pinUI *pinUIObject;
 };
 
 #endif // CARDREADER_H

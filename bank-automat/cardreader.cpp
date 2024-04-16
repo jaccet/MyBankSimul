@@ -1,7 +1,6 @@
 #include "cardreader.h"
 #include "ui_cardreader.h"
 #include <QDebug>
-#include "pinui.h"
 
 cardReader::cardReader(QWidget *parent) :
     QDialog(parent),
@@ -30,9 +29,7 @@ void cardReader::handleClick()
 
 void cardReader::on_pushButton_clicked()
 {
-    pinUI *pinUIObject = new pinUI(this);
-    connect(pinUIObject,SIGNAL(sendPinNumToMain(QString)),
-            this,SLOT(handlePinNumberRead(QString)));
+    pinUIObject = new pinUI(this);
     pinUIObject->show();
     this->close();
 }

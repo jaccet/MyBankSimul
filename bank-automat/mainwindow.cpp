@@ -19,7 +19,7 @@ void MainWindow::openPort()
 {
     qDebug() << "Port is now open";
     serialPort = new QSerialPort(this);
-    serialPort->setPortName("COM4");
+    serialPort->setPortName("COM6");
     serialPort->setBaudRate(QSerialPort::Baud9600);
     serialPort->setDataBits(QSerialPort::Data8);
     connect(serialPort, &QSerialPort::readyRead, this, &MainWindow::handleInserCardClick);
@@ -85,8 +85,7 @@ void MainWindow::on_LoginBT_clicked()
 
 void MainWindow::on_INSERT_CARD_BT_clicked()
 {
-    ui->setupUi(this);
-    pinpointer = new pinUI();
+    pinpointer = new pinUI(this);
     pinpointer->show();
 }
 

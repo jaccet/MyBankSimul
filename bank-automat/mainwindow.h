@@ -30,7 +30,6 @@ signals:
 
 private slots:
     void handleInserCardClick();
-    void handleCardNumberRead(short);
     void on_LoginBT_clicked();
     void handlePinNumberRead(QString);
     //RFID

@@ -11,7 +11,6 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     connect(ui->INSERT_CARD_BT,SIGNAL(clicked(bool)),
             this,SLOT(handleInserCardClick()));
-    //ui->INSERT_CARD_BT->animateClick();
     this->setStyleSheet("background-color: lightblue;");
     openPort();
     handleInserCardClick();
@@ -38,15 +37,14 @@ MainWindow::~MainWindow()
     serialPort->close();
     ui=nullptr;
 }
-//RFID
+
 void MainWindow::handleInserCardClick()
 {
     //RFID
     QByteArray rD = serialPort->readAll();
     qDebug() << rD;
-    userid=rD;
-    // ui->tekstiboksi->setText(rD);
-    userid.remove(0,7);
+    userid=rD;              // userID korvataan käyttäjällä, muutetaan tätä True/false metodiin että katsotaan onko käyttäjää olemassa.
+    userid.remove(0,7);     // Rivit 47 - 48 leikkaa turhaa infoa kortista helpompaa lukua varten.
     userid.chop(3);
     qDebug() << userid;
 
@@ -55,12 +53,14 @@ void MainWindow::handleInserCardClick()
         QString name="Mikki Hiiri";
         qDebug() << "mikki hiiri";
         serialPort->close();
+        serialPort->deleteLater();
     }
     if (userid.startsWith("CAA")){
         ui->INSERT_CARD_BT->animateClick();
         QString name="Aku Ankka";
         qDebug() << "Aku Ankka";
         serialPort->close();
+        serialPort->deleteLater();
     }
 
 }
@@ -72,15 +72,6 @@ void MainWindow::handlePinNumberRead(QString numero)
     qDebug()<<"numero on : " << numero;
     ui->Current_PIN_NumberLE->setText(numero);
 }
-    //RFID
-void MainWindow::handleCardNumberRead(short n)
-{
-    qDebug()<<"MainWindow handleCardNumberRead funktiossa";
-    qDebug()<<"numero on = "<<n;
-    cardNumber = n;
-    ui->Current_CARD_NumberLE->setText(QString::number(n));
-}
-
 
 void MainWindow::on_LoginBT_clicked()
 {
@@ -97,6 +88,5 @@ void MainWindow::on_INSERT_CARD_BT_clicked()
     ui->setupUi(this);
     pinpointer = new pinUI();
     pinpointer->show();
-    qDebug()<<"hojohojo";
 }
 

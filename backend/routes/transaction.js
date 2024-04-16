@@ -73,4 +73,15 @@ router.delete('/:idtransaction',function(request, response){
     });
 });
 
+router.post('/withdrawal',function(request,response){
+    transaction.withdrawal(request.body,function(err,result){
+        if(err){
+            response.send(err);
+        } else {
+            console.log(result);
+            response.json(result);
+        }
+    });
+});
+
 module.exports=router;

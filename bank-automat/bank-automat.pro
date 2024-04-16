@@ -9,20 +9,17 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    cardreader.cpp \
     main.cpp \
     mainwindow.cpp \
     pankkisivu.cpp \
     pinui.cpp
 
 HEADERS += \
-    cardreader.h \
     mainwindow.h \
     pankkisivu.h \
     pinui.h
 
 FORMS += \
-    cardreader.ui \
     mainwindow.ui \
     pankkisivu.ui \
     pinui.ui

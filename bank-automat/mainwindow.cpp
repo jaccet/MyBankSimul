@@ -2,6 +2,8 @@
 #include "ui_mainwindow.h"
 #include <QDebug>
 #include "pinui.h"
+
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -18,6 +20,23 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->INSERT_CARD_BT,SIGNAL(clicked(bool)),
             this,SLOT(handleInserCardClick()));
     this->setStyleSheet("background-color: lightblue;");
+    openPort();
+    handleInserCardClick();
+}
+void MainWindow::openPort()
+{
+    qDebug() << "Port is now open";
+    serialPort = new QSerialPort(this);
+    serialPort->setPortName("COM6");
+    serialPort->setBaudRate(QSerialPort::Baud9600);
+    serialPort->setDataBits(QSerialPort::Data8);
+    connect(serialPort, &QSerialPort::readyRead, this, &MainWindow::handleInserCardClick);
+    if (serialPort->open(QIODevice::ReadOnly)) {
+        qDebug() << "Serialport opened successfully.";
+    }
+    else {
+        qDebug() << "unexpected error occured on port opening.";
+    }
 }
 
 MainWindow::~MainWindow()
@@ -26,14 +45,14 @@ MainWindow::~MainWindow()
     serialPort->close();
     ui=nullptr;
 }
-//RFID
-void MainWindow::dataHandler(){
 
+void MainWindow::handleInserCardClick()
+{
+    //RFID
     QByteArray rD = serialPort->readAll();
     qDebug() << rD;
-    userid=rD;
-    // ui->tekstiboksi->setText(rD);
-    userid.remove(0,7);
+    userid=rD;              // userID korvataan käyttäjällä, muutetaan tätä True/false metodiin että katsotaan onko käyttäjää olemassa.
+    userid.remove(0,7);     // Rivit 47 - 48 leikkaa turhaa infoa kortista helpompaa lukua varten.
     userid.chop(3);
     qDebug() << userid;
 
@@ -42,38 +61,25 @@ void MainWindow::dataHandler(){
         QString name="Mikki Hiiri";
         qDebug() << "mikki hiiri";
         serialPort->close();
+        serialPort->deleteLater();
     }
     if (userid.startsWith("CAA")){
         ui->INSERT_CARD_BT->animateClick();
         QString name="Aku Ankka";
         qDebug() << "Aku Ankka";
         serialPort->close();
+        serialPort->deleteLater();
     }
-}
 
 
-void MainWindow::handleInserCardClick()
-{
-    //RFID
-    qDebug()<<"handleInsertCardClick funktiossa";
-    readerPtr = new cardReader(this);
-    connect(readerPtr,SIGNAL(sendCardNumToMain(short)),
-            this,SLOT(handleCardNumberRead(short)));
-    readerPtr->show();
 }
-    //PIN
+
+//PIN
+
 void MainWindow::handlePinNumberRead(QString numero)
 {
     qDebug()<<"numero on : " << numero;
     ui->Current_PIN_NumberLE->setText(numero);
-}
-    //RFID
-void MainWindow::handleCardNumberRead(short n)
-{
-    qDebug()<<"MainWindow handleCardNumberRead funktiossa";
-    qDebug()<<"numero on = "<<n;
-    cardNumber = n;
-    ui->Current_CARD_NumberLE->setText(QString::number(n));
 }
 
 void MainWindow::on_LoginBT_clicked()
@@ -84,4 +90,12 @@ void MainWindow::on_LoginBT_clicked()
     close();
 }
 
+
+
+
+void MainWindow::on_INSERT_CARD_BT_clicked()
+{
+    pinpointer = new pinUI(this);
+    pinpointer->show();
+}
 

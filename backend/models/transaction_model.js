@@ -18,6 +18,9 @@ const transaction={
     },
     deleteTransaction(idtransaction, callback){
         return db.query("DELETE FROM transaction WHERE idtransaction=?",[idtransaction],callback);
+    },
+    withdrawal(withdrawalInfo,callback){
+        return db.query("CALL withdrawal(?,?)",[withdrawalInfo.IBAN_no,withdrawalInfo.amount],callback);
     }
 }
 

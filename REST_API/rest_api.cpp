@@ -174,10 +174,10 @@ void REST_API::withdrawalOperation(double amount)
 {
     QJsonObject jsonObj;
 
-    balance = balance - amount;
-    jsonObj.insert("balance",balance);
+    jsonObj.insert("IBAN_no",IBAN);
+    jsonObj.insert("amount",amount);
 
-    QString site_url=base_url+"account/upAccount"+IBAN;
+    QString site_url=base_url+"transaction/withdrawal";
     QNetworkRequest request((site_url));
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
     //WEBTOKEN ALKU

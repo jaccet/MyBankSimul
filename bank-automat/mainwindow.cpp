@@ -41,6 +41,7 @@ MainWindow::~MainWindow()
 //RFID
 void MainWindow::handleInserCardClick()
 {
+    //RFID
     QByteArray rD = serialPort->readAll();
     qDebug() << rD;
     userid=rD;
@@ -61,9 +62,11 @@ void MainWindow::handleInserCardClick()
         qDebug() << "Aku Ankka";
         serialPort->close();
     }
+
 }
 
 //PIN
+
 void MainWindow::handlePinNumberRead(QString numero)
 {
     qDebug()<<"numero on : " << numero;
@@ -86,6 +89,7 @@ void MainWindow::on_LoginBT_clicked()
     pankkiPtr->show();
     close();
 }
+
 
 
 void MainWindow::on_INSERT_CARD_BT_clicked()

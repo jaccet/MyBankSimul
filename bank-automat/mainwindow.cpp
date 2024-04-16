@@ -2,6 +2,8 @@
 #include "ui_mainwindow.h"
 #include <QDebug>
 #include "pinui.h"
+
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -9,7 +11,25 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     connect(ui->INSERT_CARD_BT,SIGNAL(clicked(bool)),
             this,SLOT(handleInserCardClick()));
+    //ui->INSERT_CARD_BT->animateClick();
     this->setStyleSheet("background-color: lightblue;");
+    openPort();
+    handleInserCardClick();
+}
+void MainWindow::openPort()
+{
+    qDebug() << "Port is now open";
+    serialPort = new QSerialPort(this);
+    serialPort->setPortName("COM4");
+    serialPort->setBaudRate(QSerialPort::Baud9600);
+    serialPort->setDataBits(QSerialPort::Data8);
+    connect(serialPort, &QSerialPort::readyRead, this, &MainWindow::handleInserCardClick);
+    if (serialPort->open(QIODevice::ReadOnly)) {
+        qDebug() << "Serialport opened successfully.";
+    }
+    else {
+        qDebug() << "unexpected error occured on port opening.";
+    }
 }
 
 MainWindow::~MainWindow()
@@ -42,12 +62,11 @@ void MainWindow::handleInserCardClick()
         qDebug() << "Aku Ankka";
         serialPort->close();
     }
-    readerPtr = new cardReader(this);
-    connect(readerPtr,SIGNAL(sendCardNumToMain(short)),
-            this,SLOT(handleCardNumberRead(short)));
-    readerPtr->show();*/
+
 }
-    //PIN
+
+//PIN
+
 void MainWindow::handlePinNumberRead(QString numero)
 {
     qDebug()<<"numero on : " << numero;
@@ -62,6 +81,7 @@ void MainWindow::handleCardNumberRead(short n)
     ui->Current_CARD_NumberLE->setText(QString::number(n));
 }
 
+
 void MainWindow::on_LoginBT_clicked()
 {
     qDebug()<<"login funktiossa";
@@ -69,3 +89,14 @@ void MainWindow::on_LoginBT_clicked()
     pankkiPtr->show();
     close();
 }
+
+
+
+void MainWindow::on_INSERT_CARD_BT_clicked()
+{
+    ui->setupUi(this);
+    pinpointer = new pinUI();
+    pinpointer->show();
+    qDebug()<<"hojohojo";
+}
+

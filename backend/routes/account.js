@@ -25,7 +25,7 @@ router.get('/:iban',function(request, response){
     });
 });
 
-router.get('/:card_no',function(request,response){
+router.get('/info/:card_no',function(request,response){
     account.getAccountInfoByCard(request.params.card_no,function(err,result){
         if(err){
             response.send(err);

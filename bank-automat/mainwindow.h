@@ -36,12 +36,10 @@ private slots:
     //RFID
     void openPort();
     void on_INSERT_CARD_BT_clicked();
-
 private:
     Ui::MainWindow *ui;
     short cardNumber;
     short correctCardNumber = 1234;
-    cardReader * readerPtr;
     pankkiSivu * pankkiPtr;
     QSerialPort * serialPort;
     QString userid;

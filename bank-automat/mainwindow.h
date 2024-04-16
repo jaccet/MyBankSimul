@@ -33,10 +33,9 @@ private slots:
     void handleCardNumberRead(short);
     void on_LoginBT_clicked();
     void handlePinNumberRead(QString);
-    void on_LoginBT_toggled(bool checked);
     //RFID
-    void dataHandler();
-    void on_SignalSender_clicked();
+    void openPort();
+    void on_INSERT_CARD_BT_clicked();
 
 private:
     Ui::MainWindow *ui;
@@ -47,6 +46,6 @@ private:
     QSerialPort * serialPort;
     QString userid;
     QString name;
-    Pinuitest * pinpointer;
+    pinUI * pinpointer;
 };
 #endif // MAINWINDOW_H

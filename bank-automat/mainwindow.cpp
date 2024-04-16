@@ -2,22 +2,34 @@
 #include "ui_mainwindow.h"
 #include <QDebug>
 #include "pinui.h"
+
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
-    serialPort = new QSerialPort(this);
-    serialPort->setPortName("COM3");
-    serialPort->setBaudRate(QSerialPort::Baud9600);
-    serialPort->setDataBits(QSerialPort::Data8);
-    serialPort->setParity(QSerialPort::NoParity);
-    serialPort->setStopBits(QSerialPort::OneStop);
-    serialPort->setFlowControl(QSerialPort::NoFlowControl);
-
     ui->setupUi(this);
     connect(ui->INSERT_CARD_BT,SIGNAL(clicked(bool)),
             this,SLOT(handleInserCardClick()));
+    //ui->INSERT_CARD_BT->animateClick();
     this->setStyleSheet("background-color: lightblue;");
+    openPort();
+    handleInserCardClick();
+}
+void MainWindow::openPort()
+{
+    qDebug() << "Port is now open";
+    serialPort = new QSerialPort(this);
+    serialPort->setPortName("COM4");
+    serialPort->setBaudRate(QSerialPort::Baud9600);
+    serialPort->setDataBits(QSerialPort::Data8);
+    connect(serialPort, &QSerialPort::readyRead, this, &MainWindow::handleInserCardClick);
+    if (serialPort->open(QIODevice::ReadOnly)) {
+        qDebug() << "Serialport opened successfully.";
+    }
+    else {
+        qDebug() << "unexpected error occured on port opening.";
+    }
 }
 
 MainWindow::~MainWindow()
@@ -27,8 +39,8 @@ MainWindow::~MainWindow()
     ui=nullptr;
 }
 //RFID
-void MainWindow::dataHandler(){
-
+void MainWindow::handleInserCardClick()
+{
     QByteArray rD = serialPort->readAll();
     qDebug() << rD;
     userid=rD;
@@ -51,25 +63,7 @@ void MainWindow::dataHandler(){
     }
 }
 
-void MainWindow::on_INSERT_CARD_BT_clicked()
-{
-    ui->setupUi(this);
-    pinpointer = new Pinuitest(this);
-    ui->INSERT_CARD_BT->deleteLater();
-    pinpointer->show();
-
-}
-
-void MainWindow::handleInserCardClick()
-{
-    //RFID
-    qDebug()<<"handleInsertCardClick funktiossa";
-    readerPtr = new cardReader(this);
-    connect(readerPtr,SIGNAL(sendCardNumToMain(short)),
-            this,SLOT(handleCardNumberRead(short)));
-    readerPtr->show();
-}
-    //PIN
+//PIN
 void MainWindow::handlePinNumberRead(QString numero)
 {
     qDebug()<<"numero on : " << numero;
@@ -84,6 +78,7 @@ void MainWindow::handleCardNumberRead(short n)
     ui->Current_CARD_NumberLE->setText(QString::number(n));
 }
 
+
 void MainWindow::on_LoginBT_clicked()
 {
     qDebug()<<"login funktiossa";
@@ -92,4 +87,12 @@ void MainWindow::on_LoginBT_clicked()
     close();
 }
 
+
+void MainWindow::on_INSERT_CARD_BT_clicked()
+{
+    ui->setupUi(this);
+    pinpointer = new pinUI();
+    pinpointer->show();
+    qDebug()<<"hojohojo";
+}
 

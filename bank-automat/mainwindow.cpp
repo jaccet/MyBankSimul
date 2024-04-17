@@ -73,7 +73,7 @@ void MainWindow::receiveCardCheck(bool cardCheckResult)
         connect(rfidPtr->serialPort, SIGNAL(readyRead()), this,SLOT(handleInserCardClick()));
     }
     else {
-        pinpointer = new pinUI(this);
+        pinpointer = new pinUI(this,restPtr);
         connect(pinpointer,SIGNAL(loginResultFromPinUI(bool)),this,SLOT(receiveLogin(bool)));
         pinpointer->show();
     }

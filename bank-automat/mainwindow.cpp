@@ -8,20 +8,11 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
-    serialPort = new QSerialPort(this);
-    serialPort->setPortName("COM3");
-    serialPort->setBaudRate(QSerialPort::Baud9600);
-    serialPort->setDataBits(QSerialPort::Data8);
-    serialPort->setParity(QSerialPort::NoParity);
-    serialPort->setStopBits(QSerialPort::OneStop);
-    serialPort->setFlowControl(QSerialPort::NoFlowControl);
-
     ui->setupUi(this);
     connect(ui->INSERT_CARD_BT,SIGNAL(clicked(bool)),
             this,SLOT(handleInserCardClick()));
     this->setStyleSheet("background-color: lightblue;");
     openPort();
-    handleInserCardClick();
 }
 void MainWindow::openPort()
 {
@@ -61,14 +52,14 @@ void MainWindow::handleInserCardClick()
         QString name="Mikki Hiiri";
         qDebug() << "mikki hiiri";
         serialPort->close();
-        serialPort->deleteLater();
+        //serialPort->deleteLater();
     }
     if (userid.startsWith("CAA")){
         ui->INSERT_CARD_BT->animateClick();
         QString name="Aku Ankka";
         qDebug() << "Aku Ankka";
         serialPort->close();
-        serialPort->deleteLater();
+        //serialPort->deleteLater();
     }
 
 

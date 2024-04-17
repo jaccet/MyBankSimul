@@ -11,7 +11,7 @@ pinUI::pinUI(QWidget *parent) :
     qDebug() << "rest_api olio luotu";
     QList<QPushButton*> list = {ui->button1,ui->button2,ui->button3,ui->button4,ui->button5,ui->button6,ui->button7,ui->button8,ui->button9,ui->button0};
     QList<QPushButton*> list2 = {ui->buttonClr,ui->buttonEnter,ui->buttonBck};
-    qDebug() << "pinUI käynnistetty, ja QListit jokaiselle napille luotu";
+    qDebug() << "pinUI käynnistetty";
     for(QPushButton *button:list)
     {
         connect(button,SIGNAL(clicked()),this,SLOT(numberClickedHandler()));
@@ -20,6 +20,7 @@ pinUI::pinUI(QWidget *parent) :
     {
         connect(button,SIGNAL(clicked()),this,SLOT(clrEntBckClickedHandler()));
     }
+    qDebug() << "QListit jokaiselle napille luotu";
 }
 
 pinUI::~pinUI()

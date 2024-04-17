@@ -30,7 +30,7 @@ private slots:
 signals:
     void connectionError();
     bool cardChecked(bool);
-    bool loginSuccessful(bool);
+    void loginSuccessful(bool);
     QJsonObject transactionInfoReceived(QJsonObject);
     QJsonObject accountLogisticsReceived(QJsonObject);
 private:

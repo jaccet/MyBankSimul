@@ -22,6 +22,8 @@ pinUI::pinUI(QWidget *parent) :
         connect(button,SIGNAL(clicked()),this,SLOT(clrEntBckClickedHandler()));
     }
     qDebug() << "QListit jokaiselle napille luotu";
+    connect(apiObject,SIGNAL(loginSuccessful(bool)),this,SLOT(loginHandler(bool)));
+    qDebug() << "rest_api kytketty";
 }
 
 pinUI::~pinUI()
@@ -76,7 +78,6 @@ void pinUI::clrEntBckClickedHandler()
         //TÄHÄN SIGNAALI
         //emit sendPinNumToMain(number);
         qDebug() << "enteriä painettu";
-        connect(apiObject,SIGNAL(loginSuccessful(bool)),this,SLOT(loginHandler(bool)));
         apiObject->requestLogin(number);
         qDebug() << "rest_apia kutsuttu";
     }
@@ -94,7 +95,8 @@ void pinUI::loginHandler(bool logResult)
         qDebug() << "numero nollattu";
         lockHandler();
     }
-    else{
+    else if(logResult == true)
+    {
         qDebug() << "PIN-koodi on oikea";
         switchFontSize(10);
         isCorrect = true;
@@ -102,6 +104,7 @@ void pinUI::loginHandler(bool logResult)
         lockHandler();
         QTimer::singleShot(2500, this, SLOT(reEnableOrClose()));
     }
+    logResult = NULL;
 }
 
 

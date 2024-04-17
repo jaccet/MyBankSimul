@@ -32,60 +32,50 @@ MainWindow::~MainWindow()
 void MainWindow::handleInserCardClick()
 {
     //RFID
-
-    QByteArray rD = rfidPtr->readPort();
-    rfidPtr->closePort();
-    qDebug() << rD;
-    userid=rD;              // userID korvataan käyttäjällä, muutetaan tätä True/false metodiin että katsotaan onko käyttäjää olemassa.
-    userid.remove(0,7);     // Rivit 47 - 48 leikkaa turhaa infoa kortista helpompaa lukua varten.
-    userid.chop(3);
-    qDebug() << userid;
-
-    restPtr->checkCard(userid);
-
-/*    if (userid.startsWith("C1A")){
-        ui->INSERT_CARD_BT->animateClick();
-        rfidPtr->closePort();
-    }
-    if (userid.startsWith(cardNumber)){
-        ui->INSERT_CARD_BT->animateClick();
-        // QString name="Aku Ankka";
-        // qDebug() << "Aku Ankka";
-        rfidPtr->closePort();
-    }
-*/
-
+    QByteArray rD = rfidPtr->readPort();    // tallettaa luetun serialport datan
+    rfidPtr->closePort();                   // sulkee portin
+    qDebug() << rD;                         //
+    userid=rD;                              // Katsoo käyttäjää ja luo siitä käsiteltävän muodon.
+    userid.remove(0,7);                     // remove katsoo 1 arvossa että mistä lähdetään liikkeelle ja luku 7 osoittaa poistettujen merkkien määrää
+    userid.chop(3);                         // 47 leikkaa 3 merkkiä datan loppupäästä
+    qDebug() << userid;                     //
+    restPtr->checkCard(userid);             //  Pointteri RestAPI:n checkCard functioon
 }
 
 //PIN
-
 void MainWindow::handlePinNumberRead(QString numero)
 {
     qDebug()<<"numero on : " << numero;
     ui->Current_PIN_NumberLE->setText(numero);
 }
 
-void MainWindow::on_LoginBT_clicked()
+void MainWindow::receiveLogin(bool loginResponse)
 {
     qDebug()<<"login funktiossa";
+    if (loginResponse == false){
+        qDebug()<< "Väärin meni";
+    }
     pankkiPtr = new pankkiSivu();
     pankkiPtr->show();
     close();
 }
 
+<<<<<<< HEAD
 void MainWindow::on_INSERT_CARD_BT_clicked()
 {
     pinpointer = new pinUI(this);
     pinpointer->show();
 }
 
+=======
+>>>>>>> origin
 void MainWindow::receiveCardCheck(bool cardCheckResult)
 {
     if (cardCheckResult == false){
         qDebug() << "Wrong card";
     }
     else {
-        ui->INSERT_CARD_BT->animateClick();
+        pinpointer = new pinUI(this);
+        pinpointer->show();
     }
 }
-

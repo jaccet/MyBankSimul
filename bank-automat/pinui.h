@@ -25,7 +25,7 @@ private slots:
     void loginHandler(bool);
 
 signals:
-    void sendPinNumToMain(QString);
+    void loginResultFromPinUI(bool);
 
 private:
     //void openSerialPort();

@@ -73,9 +73,6 @@ void MainWindow::on_LoginBT_clicked()
     close();
 }
 
-
-
-
 void MainWindow::on_INSERT_CARD_BT_clicked()
 {
     pinpointer = new pinUI(this);

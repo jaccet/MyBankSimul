@@ -11,6 +11,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     qDebug() << "menee tänne";
     rfidPtr = new rfid(this);
+    rfidPtr->portInfo();
     rfidPtr->openPort();
     //connect(ui->INSERT_CARD_BT,SIGNAL(clicked(bool)), this,SLOT(handleInserCardClick()));
     connect(rfidPtr->serialPort, SIGNAL(readyRead()), this,SLOT(handleInserCardClick()));
@@ -33,14 +34,14 @@ void MainWindow::handleInserCardClick()
 {
     //RFID
 
-    QByteArray rD = rfidPtr->readPort();    // tallettaa luetun serialport datan
-    rfidPtr->closePort();                   // sulkee portin
+    QByteArray rD = rfidPtr->readPort();    // Tallettaa luetun serialport datan
+    rfidPtr->closePort();                   // Sulkee portin
     qDebug() << rD;                         //
     userid=rD;                              // Katsoo käyttäjää ja luo siitä käsiteltävän muodon.
-    userid.remove(0,7);                     // remove katsoo 1 arvossa että mistä lähdetään liikkeelle ja luku 7 osoittaa poistettujen merkkien määrää
-    userid.chop(3);                         // 47 leikkaa 3 merkkiä datan loppupäästä
+    userid.remove(0,7);                     // Remove(*,*) katsoo 1 arvossa että mistä lähdetään liikkeelle ja luku 7 osoittaa poistettujen merkkien määrää
+    userid.chop(3);                         // Poistaa 3 merkkiä datan loppupäästä
     qDebug() << userid;                     //
-    restPtr->checkCard(userid);             //  Pointteri RestAPI:n checkCard functioon
+    restPtr->checkCard(userid);             // Pointteri RestAPI:n checkCard functioon
 
 }
 

@@ -9,12 +9,14 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    qDebug() << "menee tänne";
     rfidPtr = new rfid(this);
     rfidPtr->openPort();
-    connect(ui->INSERT_CARD_BT,SIGNAL(clicked(bool)),
-            this,SLOT(handleInserCardClick()));
+    connect(ui->INSERT_CARD_BT,SIGNAL(clicked(bool)), this,SLOT(handleInserCardClick()));
+
     this->setStyleSheet("background-color: lightblue;");
     connect(rfidPtr->serialPort, SIGNAL(readyRead()), this,SLOT(handleInserCardClick()));
+
 }
 MainWindow::~MainWindow()
 {

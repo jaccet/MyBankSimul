@@ -36,3 +36,9 @@ else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../REST_API/build/debug
 
 INCLUDEPATH += $$PWD/../REST_API
 DEPENDPATH += $$PWD/../REST_API
+
+RESOURCES += \
+    resources.qrc
+
+DISTFILES += \
+    styles/styles.qss

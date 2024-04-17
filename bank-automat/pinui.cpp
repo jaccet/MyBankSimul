@@ -9,7 +9,7 @@ pinUI::pinUI(QWidget *parent) :
     ui->setupUi(this);
     this->setAttribute(Qt::WA_DeleteOnClose);
     apiObject = new REST_API;
-    apiObject->setCard_no("1111222233334444");
+    //apiObject->setCard_no("1111222233334444");
     qDebug() << "rest_api olio luotu";
     QList<QPushButton*> list = {ui->button1,ui->button2,ui->button3,ui->button4,ui->button5,ui->button6,ui->button7,ui->button8,ui->button9,ui->button0};
     QList<QPushButton*> list2 = {ui->buttonClr,ui->buttonEnter,ui->buttonBck};
@@ -104,6 +104,7 @@ void pinUI::loginHandler(bool logResult)
         ui->infoScreen->setText("Correct PIN number. Logging in...");
         lockHandler();
         QTimer::singleShot(2500, this, SLOT(reEnableOrClose()));
+
     }
     logResult = NULL;
 }

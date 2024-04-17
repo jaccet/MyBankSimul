@@ -49,18 +49,15 @@ void MainWindow::handlePinNumberRead(QString numero)
     ui->Current_PIN_NumberLE->setText(numero);
 }
 
-void MainWindow::on_LoginBT_clicked()
+void MainWindow::receiveLogin(bool loginResponse)
 {
     qDebug()<<"login funktiossa";
+    if (loginResponse == false){
+        qDebug()<< "Väärin meni";
+    }
     pankkiPtr = new pankkiSivu();
     pankkiPtr->show();
     close();
-}
-
-void MainWindow::on_INSERT_CARD_BT_clicked()
-{
-    pinpointer = new pinUI(this);
-    pinpointer->show();
 }
 
 void MainWindow::receiveCardCheck(bool cardCheckResult)
@@ -69,6 +66,7 @@ void MainWindow::receiveCardCheck(bool cardCheckResult)
         qDebug() << "Wrong card";
     }
     else {
-        ui->INSERT_CARD_BT->animateClick();
+        pinpointer = new pinUI(this);
+        pinpointer->show();
     }
 }

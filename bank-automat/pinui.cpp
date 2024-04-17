@@ -29,6 +29,7 @@ pinUI::pinUI(QWidget *parent) :
 pinUI::~pinUI()
 {
     qDebug() << "pinUI, sekä rest_api olio tuhottu";
+    emit testSignal();
     delete ui;
     delete apiObject;
     apiObject=nullptr;
@@ -138,7 +139,6 @@ void pinUI::reEnableOrClose()
     if(isCorrect == true)
     {
         this->close();
-        //rfidPtr
         qDebug() << "pinUI-ikkuna suljettu";
     }
     else

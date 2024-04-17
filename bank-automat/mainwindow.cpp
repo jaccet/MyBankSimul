@@ -66,12 +66,21 @@ void MainWindow::on_LoginBT_clicked()
     close();
 }
 
+void MainWindow::openAgain()
+{
+    qDebug()<<"persepaskapersepaskapersepaska";
+    rfidPtr->openPort();
+}
 
-
+void MainWindow::uiluonti()
+{
+    pinpointer = new pinUI(this);
+    connect(pinpointer,SIGNAL(testSignal()),this,SLOT(openAgain()));
+}
 
 void MainWindow::on_INSERT_CARD_BT_clicked()
 {
-    pinpointer = new pinUI(this);
+    uiluonti();
     pinpointer->show();
 }
 

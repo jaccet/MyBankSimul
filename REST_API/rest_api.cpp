@@ -42,11 +42,15 @@ void REST_API::requestLogin(QString pin)
 void REST_API::cardSlot(QNetworkReply *reply)
 {
     responseData = reply->readAll();
-
-    if (responseData == "false") {
-        emit cardChecked(false);
+    if(responseData=="-4078" || responseData.length()==0){
+        qDebug()<<"Connection Error!";
+        emit connectionError();
     } else {
-        emit cardChecked(true);
+        if (responseData == "false") {
+        emit cardChecked(false);
+        } else {
+            emit cardChecked(true);
+        }
     }
     reply->deleteLater();
     loginManager->deleteLater();
@@ -57,7 +61,6 @@ void REST_API::loginSlot(QNetworkReply *reply)
     responseData=reply->readAll();
 
     if(responseData=="-4078" || responseData.length()==0){
-
         qDebug()<<"Connection Error!";
         emit loginSuccessful(false);
     }
@@ -66,14 +69,13 @@ void REST_API::loginSlot(QNetworkReply *reply)
             //kirjautuminen onnistui
             webtoken=responseData;
             emit loginSuccessful(true);
+            getAndSetAccountIBAN();
         }
         else{
             qDebug()<<"Wrong Card or Pin";
             emit loginSuccessful(false);
         }
     }
-
-    getAndSetAccountIBAN();
 
     reply->deleteLater();
     loginManager->deleteLater();
@@ -86,7 +88,14 @@ void REST_API::transactionSlot(QNetworkReply *reply)
     QJsonDocument json_doc = QJsonDocument::fromJson(responseData);
     QJsonObject json_obj = json_doc.object();
     qDebug()<<json_obj;
-    emit transactionInfoReceived(json_obj);
+    if(responseData=="-4078" || responseData.length()==0){
+        qDebug()<<"Connection Error!";
+        emit connectionError();
+    }
+    else {
+        emit transactionInfoReceived(json_obj);
+    }
+
     reply->deleteLater();
     infoManager->deleteLater();
 }
@@ -98,8 +107,13 @@ void REST_API::accountLogisticSlot(QNetworkReply *reply)
     QJsonDocument json_doc = QJsonDocument::fromJson(responseData);
     QJsonObject json_obj = json_doc.object();
     qDebug()<<json_obj;
-    balance = json_obj["balance"].toDouble();
-    emit accountLogisticsReceived(json_obj);
+    if(responseData=="-4078" || responseData.length()==0){
+        qDebug()<<"Connection Error!";
+        emit connectionError();
+    } else {
+        balance = json_obj["balance"].toDouble();
+        emit accountLogisticsReceived(json_obj);
+    }
     reply->deleteLater();
     infoManager->deleteLater();
 }
@@ -114,8 +128,13 @@ void REST_API::withdrawalSlot(QNetworkReply *reply)
 void REST_API::IBANSlot(QNetworkReply *reply)
 {
     responseData=reply->readAll();
-    //qDebug()<<response_data;
-    IBAN = responseData;
+    if(responseData=="-4078" || responseData.length()==0){
+        qDebug()<<"Connection Error!";
+        emit connectionError();
+    } else {
+        //qDebug()<<response_data;
+        IBAN = responseData;
+    }
     reply->deleteLater();
     infoManager->deleteLater();
 }
@@ -188,5 +207,5 @@ void REST_API::withdrawalOperation(double amount)
 
     connect(infoManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(withdrawalSlot(QNetworkReply*)));
 
-    reply = infoManager->put(request,QJsonDocument(jsonObj).toJson());
+    reply = infoManager->post(request,QJsonDocument(jsonObj).toJson());
 }

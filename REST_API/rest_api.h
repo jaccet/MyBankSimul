@@ -28,6 +28,7 @@ private slots:
     void withdrawalSlot(QNetworkReply *reply);
     void IBANSlot(QNetworkReply *reply);
 signals:
+    void connectionError();
     bool cardChecked(bool);
     bool loginSuccessful(bool);
     QJsonObject transactionInfoReceived(QJsonObject);

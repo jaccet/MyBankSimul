@@ -16,25 +16,7 @@ MainWindow::MainWindow(QWidget *parent)
     this->setStyleSheet("background-color: lightblue;");
     connect(rfidPtr->serialPort, SIGNAL(readyRead()), this,SLOT(handleInserCardClick()));
 }
-<<<<<<< HEAD
-void MainWindow::openPort()
-{
-    qDebug() << "Port is now open";
-    serialPort = new QSerialPort(this);
-    serialPort->setPortName("COM6");
-    serialPort->setBaudRate(QSerialPort::Baud9600);
-    serialPort->setDataBits(QSerialPort::Data8);
-    connect(serialPort, &QSerialPort::readyRead, this, &MainWindow::handleInserCardClick);
-    if (serialPort->open(QIODevice::ReadOnly)) {
-        qDebug() << "Serialport opened successfully.";
-    }
-    else {
-        qDebug() << "unexpected error occured on port opening.";
-    }
-}
 
-=======
->>>>>>> 86bcec6b8797cdbe4b222136788869a0121a8797
 MainWindow::~MainWindow()
 {
     delete ui;
@@ -87,11 +69,8 @@ void MainWindow::on_LoginBT_clicked()
 
 void MainWindow::on_INSERT_CARD_BT_clicked()
 {
-<<<<<<< HEAD
+
     pinpointer = new pinUI(this);
-=======
-    pinpointer = new pinUI();
->>>>>>> 86bcec6b8797cdbe4b222136788869a0121a8797
     pinpointer->show();
 }
 

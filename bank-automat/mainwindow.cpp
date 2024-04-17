@@ -12,7 +12,7 @@ MainWindow::MainWindow(QWidget *parent)
     qDebug() << "menee tänne";
     rfidPtr = new rfid(this);
     rfidPtr->openPort();
-    connect(ui->INSERT_CARD_BT,SIGNAL(clicked(bool)), this,SLOT(handleInserCardClick()));
+    //connect(ui->INSERT_CARD_BT,SIGNAL(clicked(bool)), this,SLOT(handleInserCardClick()));
     connect(rfidPtr->serialPort, SIGNAL(readyRead()), this,SLOT(handleInserCardClick()));
     restPtr = new REST_API;
     connect(restPtr, SIGNAL(cardChecked(bool)), this, SLOT(receiveCardCheck(bool)));
@@ -80,6 +80,8 @@ void MainWindow::receiveCardCheck(bool cardCheckResult)
 {
     if (cardCheckResult == false){
         qDebug() << "Wrong card";
+        rfidPtr->openPort();
+        connect(rfidPtr->serialPort, SIGNAL(readyRead()), this,SLOT(handleInserCardClick()));
     }
     else {
         pinpointer = new pinUI(this);

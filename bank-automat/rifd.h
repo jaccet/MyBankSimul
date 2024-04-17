@@ -16,8 +16,10 @@ public:
     explicit rfid(QObject *parent = nullptr);
     void openPort();
     void closePort();
+    void portInfo();
     QByteArray readPort();
     QSerialPort * serialPort;
+    QString portNumber;
 
 };
 

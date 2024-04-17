@@ -26,7 +26,6 @@ signals:
     void sendPinNumToMain(QString);
 
 private:
-    //void openSerialPort();
     Ui::pinUI *ui;
     QString starCount,number;
     QString testipinkoodi="6262";

@@ -33,19 +33,18 @@ void MainWindow::handleInserCardClick()
 {
     //RFID
 
-    QByteArray rD = rfidPtr->readPort();
-    rfidPtr->closePort();
-    qDebug() << rD;
-    userid=rD;              // userID korvataan käyttäjällä, muutetaan tätä True/false metodiin että katsotaan onko käyttäjää olemassa.
-    userid.remove(0,7);     // Rivit 47 - 48 leikkaa turhaa infoa kortista helpompaa lukua varten.
-    userid.chop(3);
-    qDebug() << userid;
+    QByteArray rD = rfidPtr->readPort();    // tallettaa luetun serialport datan
+    rfidPtr->closePort();                   // sulkee portin
+    qDebug() << rD;                         //
+    userid=rD;                              // Katsoo käyttäjää ja luo siitä käsiteltävän muodon.
+    userid.remove(0,7);                     // remove katsoo 1 arvossa että mistä lähdetään liikkeelle ja luku 7 osoittaa poistettujen merkkien määrää
+    userid.chop(3);                         // 47 leikkaa 3 merkkiä datan loppupäästä
+    qDebug() << userid;                     //
+    restPtr->checkCard(userid);             //  Pointteri RestAPI:n checkCard functioon
 
-    restPtr->checkCard(userid);
 }
 
 //PIN
-
 void MainWindow::handlePinNumberRead(QString numero)
 {
     qDebug()<<"numero on : " << numero;
@@ -79,4 +78,3 @@ void MainWindow::receiveCardCheck(bool cardCheckResult)
         pinpointer->show();
     }
 }
-

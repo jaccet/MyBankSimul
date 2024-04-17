@@ -125,6 +125,7 @@ void pinUI::lockHandler()
         }
         qDebug() << "napit disabloitu";
         QTimer::singleShot(10000, this, SLOT(reEnableOrClose()));
+        emit loginResultFromPinUI(false);
     }
     if(isCorrect == true)
     {
@@ -133,6 +134,7 @@ void pinUI::lockHandler()
         button->setEnabled(false);
         }
         qDebug() << "käyttäjän PIN-koodi syötettiin oikein. napit disabloitu.";
+        emit loginResultFromPinUI(true);
     }
 }
 

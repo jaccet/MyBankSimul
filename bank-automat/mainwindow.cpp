@@ -32,6 +32,7 @@ MainWindow::~MainWindow()
 void MainWindow::handleInserCardClick()
 {
     //RFID
+
     QByteArray rD = rfidPtr->readPort();    // tallettaa luetun serialport datan
     rfidPtr->closePort();                   // sulkee portin
     qDebug() << rD;                         //
@@ -40,6 +41,7 @@ void MainWindow::handleInserCardClick()
     userid.chop(3);                         // 47 leikkaa 3 merkkiä datan loppupäästä
     qDebug() << userid;                     //
     restPtr->checkCard(userid);             //  Pointteri RestAPI:n checkCard functioon
+
 }
 
 //PIN
@@ -54,19 +56,25 @@ void MainWindow::receiveLogin(bool loginResponse)
     qDebug()<<"login funktiossa";
     if (loginResponse == false){
         qDebug()<< "Väärin meni";
+        rfidPtr->openPort();
+        connect(rfidPtr->serialPort, SIGNAL(readyRead()), this,SLOT(handleInserCardClick()));
+    } else {
+        pankkiPtr = new pankkiSivu();
+        pankkiPtr->show();
+        close();
     }
-    pankkiPtr = new pankkiSivu();
-    pankkiPtr->show();
-    close();
 }
 
 void MainWindow::receiveCardCheck(bool cardCheckResult)
 {
     if (cardCheckResult == false){
         qDebug() << "Wrong card";
+        rfidPtr->openPort();
+        connect(rfidPtr->serialPort, SIGNAL(readyRead()), this,SLOT(handleInserCardClick()));
     }
     else {
         pinpointer = new pinUI(this);
+        connect(pinpointer,SIGNAL(loginResultFromPinUI(bool)),this,SLOT(receiveLogin(bool)));
         pinpointer->show();
     }
 }

@@ -59,6 +59,7 @@ void REST_API::cardSlot(QNetworkReply *reply)
 void REST_API::loginSlot(QNetworkReply *reply)
 {
     responseData=reply->readAll();
+    qDebug() << "in Login";
 
     if(responseData=="-4078" || responseData.length()==0){
         qDebug()<<"Connection Error!";

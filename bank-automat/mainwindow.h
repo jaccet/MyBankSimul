@@ -34,6 +34,8 @@ private slots:
     //RFID
     void openPort();
     void on_INSERT_CARD_BT_clicked();
+    void receiveCardCheck(bool);
+
 private:
     Ui::MainWindow *ui;
     short cardNumber;
@@ -42,5 +44,6 @@ private:
     pinUI * pinpointer;
     rfid * rfidPtr;
     QByteArray userid;
+    REST_API * restPtr;
 };
 #endif // MAINWINDOW_H

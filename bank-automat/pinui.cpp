@@ -1,6 +1,7 @@
 #include "pinui.h"
 #include "ui_pinui.h"
 
+
 pinUI::pinUI(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::pinUI)
@@ -140,7 +141,6 @@ void pinUI::reEnableOrClose()
     if(isCorrect == true)
     {
         this->close();
-        //rfidPtr
         qDebug() << "pinUI-ikkuna suljettu";
     }
     else

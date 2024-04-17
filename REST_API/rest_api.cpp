@@ -11,7 +11,7 @@ REST_API::~REST_API()
 void REST_API::checkCard(QString cardnumber)
 {
     setCard_no(cardnumber);
-
+    qDebug() << "käydään täällä?";
     QString site_url=base_url+"login/"+card_no;
 
     QNetworkRequest request(site_url);
@@ -41,13 +41,17 @@ void REST_API::requestLogin(QString pin)
 
 void REST_API::cardSlot(QNetworkReply *reply)
 {
+    qDebug() << "card slotissa käydään.";
     responseData = reply->readAll();
+    qDebug()<<responseData;
     if(responseData=="-4078" || responseData.length()==0){
         qDebug()<<"Connection Error!";
         emit connectionError();
     } else {
         if (responseData == "false") {
-        emit cardChecked(false);
+            emit cardChecked(false);
+        } else if (responseData.length()>5) {
+            emit cardChecked(false);
         } else {
             emit cardChecked(true);
         }

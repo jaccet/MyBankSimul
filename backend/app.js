@@ -44,7 +44,7 @@ cron.schedule('10 * * * *', () => {
     });
 
 app.use('/login',loginRouter);
-//app.use(authenticateToken);
+app.use(authenticateToken);
 app.use('/users', usersRouter);
 app.use('/card',cardRouter);
 app.use('/transaction', transactionRouter);

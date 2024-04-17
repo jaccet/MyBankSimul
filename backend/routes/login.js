@@ -9,8 +9,6 @@ router.get('/:card_no',function(request,response){
     login.checkCard(request.params.card_no,function(err,result){
         console.log(result);
         if(err){
-            response.send(err);
-        } else if (result < 16) {
             response.send(false);
         } else {
             response.send(true);

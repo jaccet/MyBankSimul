@@ -11,8 +11,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     rfidPtr = new rfid(this);
     rfidPtr->openPort();
-    connect(ui->INSERT_CARD_BT,SIGNAL(clicked(bool)),
-            this,SLOT(handleInserCardClick()));
+    connect(ui->INSERT_CARD_BT,SIGNAL(clicked(bool)),this,SLOT(handleInserCardClick()));
     this->setStyleSheet("background-color: lightblue;");
     connect(rfidPtr->serialPort, SIGNAL(readyRead()), this,SLOT(handleInserCardClick()));
 

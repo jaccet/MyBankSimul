@@ -27,12 +27,12 @@ private slots:
 signals:
     void loginResultFromPinUI(bool);
 
+
 private:
     //void openSerialPort();
     REST_API *apiObject;
     Ui::pinUI *ui;
     QString starCount,number;
-    QString testipinkoodi="6262";
     int numOftries = 3;
     void switchFontSize(short);
     void lockHandler();

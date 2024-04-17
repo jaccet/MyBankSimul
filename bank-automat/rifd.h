@@ -10,7 +10,9 @@
 class rfid : public QObject
 {
     Q_OBJECT
+
 public:
+
     explicit rfid(QObject *parent = nullptr);
     void openPort();
     void closePort();

@@ -15,7 +15,6 @@ public:
     ~REST_API();
     void checkCard(QString cardnumber);
     void requestLogin(QString pin);
-    void setCard_no(const QString &newCard_no);
     void getTransactions();
     void getAccountLogistics();
     void withdrawalOperation(double amount);
@@ -45,6 +44,8 @@ private:
     double balance;
 
     void getAndSetAccountIBAN();
+    void setcard_no(QString);
+    QString getcard_no();
 };
 
 #endif // REST_API_H

@@ -12,7 +12,6 @@ MainWindow::MainWindow(QWidget *parent)
     qDebug() << "menee tänne";
     rfidPtr = new rfid(this);
     rfidPtr->openPort();
-    //connect(ui->INSERT_CARD_BT,SIGNAL(clicked(bool)), this,SLOT(handleInserCardClick()));
     connect(rfidPtr->serialPort, SIGNAL(readyRead()), this,SLOT(handleInserCardClick()));
     restPtr = new REST_API;
     connect(restPtr, SIGNAL(cardChecked(bool)), this, SLOT(receiveCardCheck(bool)));

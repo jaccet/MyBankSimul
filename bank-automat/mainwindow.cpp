@@ -42,19 +42,6 @@ void MainWindow::handleInserCardClick()
     qDebug() << userid;
 
     restPtr->checkCard(userid);
-
-/*    if (userid.startsWith("C1A")){
-        ui->INSERT_CARD_BT->animateClick();
-        rfidPtr->closePort();
-    }
-    if (userid.startsWith(cardNumber)){
-        ui->INSERT_CARD_BT->animateClick();
-        // QString name="Aku Ankka";
-        // qDebug() << "Aku Ankka";
-        rfidPtr->closePort();
-    }
-*/
-
 }
 
 //PIN
@@ -70,19 +57,25 @@ void MainWindow::receiveLogin(bool loginResponse)
     qDebug()<<"login funktiossa";
     if (loginResponse == false){
         qDebug()<< "Väärin meni";
+        rfidPtr->openPort();
+        connect(rfidPtr->serialPort, SIGNAL(readyRead()), this,SLOT(handleInserCardClick()));
+    } else {
+        pankkiPtr = new pankkiSivu();
+        pankkiPtr->show();
+        close();
     }
-    pankkiPtr = new pankkiSivu();
-    pankkiPtr->show();
-    close();
 }
 
 void MainWindow::receiveCardCheck(bool cardCheckResult)
 {
     if (cardCheckResult == false){
         qDebug() << "Wrong card";
+        rfidPtr->openPort();
+        connect(rfidPtr->serialPort, SIGNAL(readyRead()), this,SLOT(handleInserCardClick()));
     }
     else {
         pinpointer = new pinUI(this);
+        connect(pinpointer,SIGNAL(loginResultFromPinUI(bool)),this,SLOT(receiveLogin(bool)));
         pinpointer->show();
     }
 }

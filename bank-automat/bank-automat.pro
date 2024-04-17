@@ -12,12 +12,14 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     pankkisivu.cpp \
-    pinui.cpp
+    pinui.cpp \
+    rifd.cpp
 
 HEADERS += \
     mainwindow.h \
     pankkisivu.h \
-    pinui.h
+    pinui.h \
+    rifd.h
 
 FORMS += \
     mainwindow.ui \

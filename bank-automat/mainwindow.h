@@ -7,10 +7,9 @@
 #include <QDebug>
 
 #include "rest_api.h"
-#include "cardreader.h"
+#include "rifd.h"
 #include "pankkisivu.h"
 #include "pinui.h"
-#include "pinuitest.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -40,9 +39,8 @@ private:
     short cardNumber;
     short correctCardNumber = 1234;
     pankkiSivu * pankkiPtr;
-    QSerialPort * serialPort;
-    QString userid;
-    QString name;
     pinUI * pinpointer;
+    rfid * rfidPtr;
+    QByteArray userid;
 };
 #endif // MAINWINDOW_H

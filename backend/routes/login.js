@@ -8,10 +8,14 @@ const login=require('../models/login_model');
 router.get('/:card_no',function(request,response){
     login.checkCard(request.params.card_no,function(err,result){
         console.log(result);
-        if(err){
-            response.send(false);
+        if(err) {
+            response.send(err);
         } else {
-            response.send(true);
+            if (result.length > 0) {
+                response.send(true);
+            } else {
+                response.send(false);
+            }
         }
     });
 });

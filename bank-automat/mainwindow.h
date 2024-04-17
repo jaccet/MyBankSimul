@@ -29,11 +29,10 @@ signals:
 
 private slots:
     void handleInserCardClick();
-    void on_LoginBT_clicked();
+    void receiveLogin(bool);
     void handlePinNumberRead(QString);
     //RFID
     void openPort();
-    void on_INSERT_CARD_BT_clicked();
     void receiveCardCheck(bool);
 
 private:

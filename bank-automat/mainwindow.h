@@ -29,12 +29,12 @@ signals:
 
 private slots:
     void handleInserCardClick();
-    void on_LoginBT_clicked();
+    void receiveLogin(bool);
     void handlePinNumberRead(QString);
     //RFID
     void openPort();
-    void on_INSERT_CARD_BT_clicked();
-    void openAgain();
+    void receiveCardCheck(bool);
+
 private:
     Ui::MainWindow *ui;
     short cardNumber;
@@ -43,6 +43,6 @@ private:
     pinUI * pinpointer;
     rfid * rfidPtr;
     QByteArray userid;
-    void uiluonti();
+    REST_API * restPtr;
 };
 #endif // MAINWINDOW_H

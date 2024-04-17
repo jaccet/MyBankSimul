@@ -25,7 +25,11 @@ private slots:
     void loginHandler(bool);
 
 signals:
+<<<<<<< HEAD
     void testSignal();
+=======
+    void loginResultFromPinUI(bool);
+>>>>>>> main
 
 private:
     //void openSerialPort();

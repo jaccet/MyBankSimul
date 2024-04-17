@@ -9,7 +9,7 @@ void rfid::openPort()               // Opening ports for later use.
 
     qDebug() << "Handling port opening";
     serialPort = new QSerialPort(this);
-    serialPort->setPortName("COM6");
+    serialPort->setPortName("COM3");
     serialPort->setBaudRate(QSerialPort::Baud9600);
     serialPort->setDataBits(QSerialPort::Data8);
 

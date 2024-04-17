@@ -1,14 +1,14 @@
 #include "pinui.h"
 #include "ui_pinui.h"
 
+
 pinUI::pinUI(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::pinUI)
 {
     ui->setupUi(this);
-    this->setAttribute(Qt::WA_DeleteOnClose); // Annetaan WA_DeleteOnClose niminen attribute PinUI:lle, jotta olio tuhoutuu varmasti ikkunan sulkeutuessa
-    apiObject = new REST_API; // Alustetaan REST API-olio heti alkuun
-    apiObject->setCard_no("1111222233334444");
+    this->setAttribute(Qt::WA_DeleteOnClose);
+    apiObject = new REST_API;
     qDebug() << "rest_api olio luotu";
     QList<QPushButton*> list = {ui->button1,ui->button2,ui->button3,ui->button4,ui->button5,ui->button6,ui->button7,ui->button8,ui->button9,ui->button0};
     QList<QPushButton*> list2 = {ui->buttonClr,ui->buttonEnter,ui->buttonBck}; // QListit jokaiselle PinUI:n napille, jotta jokaiselle napille ei tarvitse tehdä omaa handleria.
@@ -98,10 +98,18 @@ void pinUI::loginHandler(bool logResult) // Tapahtuu REST API:n vertaamisen jäl
     {
         qDebug() << "PIN-koodi on oikea";
         switchFontSize(10);
+<<<<<<< HEAD
         isCorrect = true; // Asetetaan bool-tyyppinen isCorrect-muuttuja true-asentoon, jotta pinUI tietää käyttäjän onnistuneen.
         ui->infoScreen->setText("Correct PIN number. Logging in..."); // Päivitetään ruutu ilmoittamaan siitä.
         lockHandler(); // Kutsutaan lockHandleria tässäkin, jotta nappeja ei voida enää painella.
         QTimer::singleShot(2500, this, SLOT(reEnableOrClose())); // Käytetään QTimerin singleShot ominaisuutta. Ajan jälkeen reEnableOrClose-funktioslotti käynnistyy, jossa ohjelma lopulta päättyy.
+=======
+        isCorrect = true;
+        ui->infoScreen->setText("Correct PIN number. Logging in...");
+        lockHandler();
+        QTimer::singleShot(2500, this, SLOT(reEnableOrClose()));
+
+>>>>>>> main
     }
     logResult = NULL; //ehkä turha lol
 }
@@ -122,6 +130,7 @@ void pinUI::lockHandler() // Toiminnolla lukitaan näppä
         }
         qDebug() << "napit disabloitu";
         QTimer::singleShot(10000, this, SLOT(reEnableOrClose()));
+        emit loginResultFromPinUI(false);
     }
     if(isCorrect == true)
     {
@@ -130,6 +139,7 @@ void pinUI::lockHandler() // Toiminnolla lukitaan näppä
         button->setEnabled(false);
         }
         qDebug() << "käyttäjän PIN-koodi syötettiin oikein. napit disabloitu.";
+        emit loginResultFromPinUI(true);
     }
 }
 

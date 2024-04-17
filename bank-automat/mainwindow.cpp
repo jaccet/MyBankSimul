@@ -13,11 +13,12 @@ MainWindow::MainWindow(QWidget *parent)
     rfidPtr = new rfid(this);
     rfidPtr->openPort();
     connect(ui->INSERT_CARD_BT,SIGNAL(clicked(bool)), this,SLOT(handleInserCardClick()));
-
     this->setStyleSheet("background-color: lightblue;");
     connect(rfidPtr->serialPort, SIGNAL(readyRead()), this,SLOT(handleInserCardClick()));
 
 }
+
+
 MainWindow::~MainWindow()
 {
     delete ui;
@@ -48,6 +49,7 @@ void MainWindow::handleInserCardClick()
         rfidPtr->closePort();
     }
 
+
 }
 
 //PIN
@@ -68,9 +70,10 @@ void MainWindow::on_LoginBT_clicked()
 
 
 
+
 void MainWindow::on_INSERT_CARD_BT_clicked()
 {
-    pinpointer = new pinUI();
+    pinpointer = new pinUI(this);
     pinpointer->show();
 }
 

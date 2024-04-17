@@ -28,8 +28,8 @@ pinUI::pinUI(QWidget *parent) :
 
 pinUI::~pinUI()
 {
+    emit loginResultFromPinUI(false);
     qDebug() << "pinUI, sekä rest_api olio tuhottu";
-    emit testSignal();
     delete ui;
     delete apiObject;
     apiObject=nullptr;
@@ -98,18 +98,10 @@ void pinUI::loginHandler(bool logResult) // Tapahtuu REST API:n vertaamisen jäl
     {
         qDebug() << "PIN-koodi on oikea";
         switchFontSize(10);
-<<<<<<< HEAD
         isCorrect = true; // Asetetaan bool-tyyppinen isCorrect-muuttuja true-asentoon, jotta pinUI tietää käyttäjän onnistuneen.
         ui->infoScreen->setText("Correct PIN number. Logging in..."); // Päivitetään ruutu ilmoittamaan siitä.
         lockHandler(); // Kutsutaan lockHandleria tässäkin, jotta nappeja ei voida enää painella.
         QTimer::singleShot(2500, this, SLOT(reEnableOrClose())); // Käytetään QTimerin singleShot ominaisuutta. Ajan jälkeen reEnableOrClose-funktioslotti käynnistyy, jossa ohjelma lopulta päättyy.
-=======
-        isCorrect = true;
-        ui->infoScreen->setText("Correct PIN number. Logging in...");
-        lockHandler();
-        QTimer::singleShot(2500, this, SLOT(reEnableOrClose()));
-
->>>>>>> main
     }
     logResult = NULL; //ehkä turha lol
 }

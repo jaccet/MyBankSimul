@@ -10,8 +10,8 @@ REST_API::~REST_API()
 
 void REST_API::checkCard(QString cardnumber)
 {
-    setCard_no(cardnumber);
-    qDebug() << "käydään täällä?";
+    setcard_no(cardnumber);
+    qDebug() << card_no;
     QString site_url=base_url+"login/"+card_no;
 
     QNetworkRequest request(site_url);
@@ -26,9 +26,9 @@ void REST_API::checkCard(QString cardnumber)
 void REST_API::requestLogin(QString pin)
 {
     QJsonObject jsonObj;
-    jsonObj.insert("card_no",card_no);
+    jsonObj.insert("card_no",getcard_no());
     jsonObj.insert("pin_no",pin);
-
+    qDebug()<<jsonObj;
     QString site_url=base_url+"login";
     QNetworkRequest request((site_url));
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
@@ -159,9 +159,14 @@ void REST_API::getAndSetAccountIBAN()
     reply = infoManager->get(request);
 }
 
-void REST_API::setCard_no(const QString &newCard_no)
+void REST_API::setcard_no(QString cardnumber)
 {
-    card_no = newCard_no;
+    card_no = cardnumber;
+}
+
+QString REST_API::getcard_no()
+{
+    return card_no;
 }
 
 void REST_API::getTransactions()

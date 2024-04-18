@@ -59,7 +59,7 @@ void MainWindow::receiveLogin(bool loginResponse)
         rfidPtr->openPort();
         connect(rfidPtr->serialPort, SIGNAL(readyRead()), this,SLOT(handleInserCardClick()));
     } else {
-        pankkiPtr = new pankkiSivu();
+        pankkiPtr = new pankkiSivu(this,restPtr);
         pankkiPtr->show();
         close();
     }

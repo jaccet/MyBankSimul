@@ -16,7 +16,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(rfidPtr->serialPort, SIGNAL(readyRead()), this,SLOT(handleInserCardClick()));
     restPtr = new REST_API;
     connect(restPtr, SIGNAL(cardChecked(bool)), this, SLOT(receiveCardCheck(bool)));
-
+    this->setStyleSheet("background-color: darkred;");
 }
 
 
@@ -61,7 +61,10 @@ void MainWindow::receiveLogin(bool loginResponse)
     }
 }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> main
 void MainWindow::receiveCardCheck(bool cardCheckResult)
 {
     if (cardCheckResult == false){

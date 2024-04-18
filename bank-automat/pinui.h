@@ -14,7 +14,7 @@ class pinUI : public QDialog
     Q_OBJECT
 
 public:
-    explicit pinUI(QWidget *parent = nullptr);
+    explicit pinUI(QWidget *parent = nullptr, REST_API *rest=nullptr);
     ~pinUI();
 
 private slots:
@@ -29,7 +29,6 @@ signals:
 
 
 private:
-    //void openSerialPort();
     REST_API *apiObject;
     Ui::pinUI *ui;
     QString starCount,number;

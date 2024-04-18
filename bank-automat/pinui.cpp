@@ -2,13 +2,13 @@
 #include "ui_pinui.h"
 
 
-pinUI::pinUI(QWidget *parent) :
+pinUI::pinUI(QWidget *parent,REST_API *rest) :
     QDialog(parent),
     ui(new Ui::pinUI)
 {
     ui->setupUi(this);
     this->setAttribute(Qt::WA_DeleteOnClose);
-    apiObject = new REST_API;
+    apiObject = rest;
     qDebug() << "rest_api olio luotu";
     QList<QPushButton*> list = {ui->button1,ui->button2,ui->button3,ui->button4,ui->button5,ui->button6,ui->button7,ui->button8,ui->button9,ui->button0};
     QList<QPushButton*> list2 = {ui->buttonClr,ui->buttonEnter,ui->buttonBck}; // QListit jokaiselle PinUI:n napille, jotta jokaiselle napille ei tarvitse tehdä omaa handleria.
@@ -31,8 +31,6 @@ pinUI::~pinUI()
     emit loginResultFromPinUI(false);
     qDebug() << "pinUI, sekä rest_api olio tuhottu";
     delete ui;
-    delete apiObject;
-    apiObject=nullptr;
     ui=nullptr;
 }
 

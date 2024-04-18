@@ -14,7 +14,7 @@ class pinUI : public QDialog
     Q_OBJECT
 
 public:
-    explicit pinUI(QWidget *parent = nullptr);
+    explicit pinUI(QWidget *parent = nullptr, REST_API *rest=nullptr);
     ~pinUI();
 
 private slots:

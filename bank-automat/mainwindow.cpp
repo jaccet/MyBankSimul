@@ -16,7 +16,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(rfidPtr->serialPort, SIGNAL(readyRead()), this,SLOT(handleInserCardClick())); // Täytyy käyttää että connectautuu readRead() signaliin, lukemista varten.
     restPtr = new REST_API;
     connect(restPtr, SIGNAL(cardChecked(bool)), this, SLOT(receiveCardCheck(bool)));
-
+    this->setStyleSheet("background-color: darkred;");
 }
 
 
@@ -44,7 +44,10 @@ void MainWindow::handleInserCardClick()
 
 }
 
+<<<<<<< HEAD
 //PIN
+=======
+>>>>>>> f9b36a2a8cf9ff1a620835af8b445593ae665ed3
 void MainWindow::receiveLogin(bool loginResponse)
 {
     qDebug()<<"login funktiossa";

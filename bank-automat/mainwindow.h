@@ -34,11 +34,10 @@ private slots:
     //RFID
     void openPort();
     void receiveCardCheck(bool);
+    void on_LoginBT_clicked();
 
 private:
     Ui::MainWindow *ui;
-    short cardNumber;
-    short correctCardNumber = 1234;
     pankkiSivu * pankkiPtr;
     pinUI * pinpointer;
     rfid * rfidPtr;

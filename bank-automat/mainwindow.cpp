@@ -16,7 +16,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(rfidPtr->serialPort, SIGNAL(readyRead()), this,SLOT(handleInserCardClick()));
     restPtr = new REST_API;
     connect(restPtr, SIGNAL(cardChecked(bool)), this, SLOT(receiveCardCheck(bool)));
-
+    this->setStyleSheet("background-color: darkred;");
 }
 
 
@@ -44,13 +44,6 @@ void MainWindow::handleInserCardClick()
 
 }
 
-//PIN
-void MainWindow::handlePinNumberRead(QString numero)
-{
-    qDebug()<<"numero on : " << numero;
-    ui->Current_PIN_NumberLE->setText(numero);
-}
-
 void MainWindow::receiveLogin(bool loginResponse)
 {
     qDebug()<<"login funktiossa";
@@ -63,12 +56,6 @@ void MainWindow::receiveLogin(bool loginResponse)
         pankkiPtr->show();
         close();
     }
-}
-
-void MainWindow::on_INSERT_CARD_BT_clicked()
-{
-    pinpointer = new pinUI(this);
-    pinpointer->show();
 }
 
 void MainWindow::receiveCardCheck(bool cardCheckResult)

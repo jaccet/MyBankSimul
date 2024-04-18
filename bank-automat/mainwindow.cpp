@@ -62,6 +62,7 @@ void MainWindow::receiveLogin(bool loginResponse)
     else {
         qDebug()<< "Oikein meni";
         pankkiPtr = new pankkiSivu(this,restPtr);
+        connect(pankkiPtr,SIGNAL(testSignal()),this,SLOT(showWindow()));
         pankkiPtr->show();
         this->hide();
     }
@@ -79,4 +80,10 @@ void MainWindow::receiveCardCheck(bool cardCheckResult)
         connect(pinpointer,SIGNAL(loginResultFromPinUI(bool)),this,SLOT(receiveLogin(bool)));
         pinpointer->show();
     }
+}
+
+void MainWindow::showWindow()
+{
+    qDebug() << "signaali läpi";
+    this->show();
 }

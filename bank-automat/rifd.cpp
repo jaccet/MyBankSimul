@@ -4,43 +4,43 @@ rfid::rfid(QObject *parent)
     : QObject{parent}
 {}
 
-void rfid::openPort()               // Opening ports for later use.
+void rfid::openPort()                                                       // Porttien avaaminen ja katsotaan onnistuiko avaaminen.
 {
 
-    qDebug() << "Handling port opening";
-    serialPort = new QSerialPort(this);
-    serialPort->setPortName(portNumber);
-    serialPort->setBaudRate(QSerialPort::Baud9600);
-    serialPort->setDataBits(QSerialPort::Data8);
+    qDebug() << "Handling port opening";                                    //
+    serialPort = new QSerialPort(this);                                     //
+    serialPort->setPortName(portNumber);                                    //
+    serialPort->setBaudRate(QSerialPort::Baud9600);                         //
+    serialPort->setDataBits(QSerialPort::Data8);                            //
 
-        if (serialPort->open(QIODevice::ReadOnly)) {
-            qDebug() << "Serialport opened successfully.";
+        if (serialPort->open(QIODevice::ReadOnly)) {                        //
+            qDebug() << "Serialport opened successfully.";                  //
         }
-        else {
-            qDebug() << "unexpected error occured on port opening.";
+        else {                                                              // Error viesti epäonnistuneen portin avaamisen yhteydessä
+            qDebug() << "unexpected error occured on port opening.";        //
         }
 
 }
 
-void rfid::closePort()              // Function for closing serialport.
+void rfid::closePort()                                                      // Suljetaan avoin portti.
 {
 
     serialPort->close();
 
 }
 
-QByteArray rfid::readPort()         // Returning data to mainprogram.
+QByteArray rfid::readPort()                                                 // Palautetaan kortista luettu data, MainWindowi:in.
 {
 
     return serialPort->readAll();
 
 }
 
-void rfid::portInfo()
+void rfid::portInfo()                                                       // Ratkaisu portin tunnistamisen automatisoinnille (tätä voidaan ehkä vähän siivota)
 {
-    const auto serialPortInfos = QSerialPortInfo::availablePorts();
-    for (const QSerialPortInfo &portInfo : serialPortInfos) {
-        qDebug() << "Port:" << portInfo.portName();
-        portNumber = portInfo.portName();
+    const auto serialPortInfos = QSerialPortInfo::availablePorts();         //
+    for (const QSerialPortInfo &portInfo : serialPortInfos) {               //
+        qDebug() << "Port:" << portInfo.portName();                         //
+        portNumber = portInfo.portName();                                   //
     }
 }

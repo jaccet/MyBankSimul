@@ -13,7 +13,7 @@ MainWindow::MainWindow(QWidget *parent)
     rfidPtr = new rfid(this);
     rfidPtr->portInfo();
     rfidPtr->openPort();
-    connect(rfidPtr->serialPort, SIGNAL(readyRead()), this,SLOT(handleInserCardClick()));
+    connect(rfidPtr->serialPort, SIGNAL(readyRead()), this,SLOT(handleInserCardClick())); // Täytyy käyttää että connectautuu readRead() signaliin, lukemista varten.
     restPtr = new REST_API;
     connect(restPtr, SIGNAL(cardChecked(bool)), this, SLOT(receiveCardCheck(bool)));
 

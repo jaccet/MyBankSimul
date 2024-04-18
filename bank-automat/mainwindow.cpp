@@ -45,12 +45,6 @@ void MainWindow::handleInserCardClick()
 }
 
 //PIN
-void MainWindow::handlePinNumberRead(QString numero)
-{
-    qDebug()<<"numero on : " << numero;
-    ui->Current_PIN_NumberLE->setText(numero);
-}
-
 void MainWindow::receiveLogin(bool loginResponse)
 {
     qDebug()<<"login funktiossa";

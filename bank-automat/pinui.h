@@ -29,7 +29,6 @@ signals:
 
 
 private:
-    //void openSerialPort();
     REST_API *apiObject;
     Ui::pinUI *ui;
     QString starCount,number;

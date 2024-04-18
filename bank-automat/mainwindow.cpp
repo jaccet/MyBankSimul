@@ -65,12 +65,6 @@ void MainWindow::receiveLogin(bool loginResponse)
     }
 }
 
-void MainWindow::on_INSERT_CARD_BT_clicked()
-{
-    pinpointer = new pinUI(this);
-    pinpointer->show();
-}
-
 void MainWindow::receiveCardCheck(bool cardCheckResult)
 {
     if (cardCheckResult == false){

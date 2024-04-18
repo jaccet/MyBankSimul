@@ -58,10 +58,12 @@ void MainWindow::receiveLogin(bool loginResponse)
         qDebug()<< "Väärin meni";
         rfidPtr->openPort();
         connect(rfidPtr->serialPort, SIGNAL(readyRead()), this,SLOT(handleInserCardClick()));
-    } else {
+    }
+    else {
+        qDebug()<< "Oikein meni";
         pankkiPtr = new pankkiSivu(this,restPtr);
         pankkiPtr->show();
-        close();
+        this->hide();
     }
 }
 

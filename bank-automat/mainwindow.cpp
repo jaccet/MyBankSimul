@@ -61,10 +61,6 @@ void MainWindow::receiveLogin(bool loginResponse)
     }
 }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> main
 void MainWindow::receiveCardCheck(bool cardCheckResult)
 {
     if (cardCheckResult == false){

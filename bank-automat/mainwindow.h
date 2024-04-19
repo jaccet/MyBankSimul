@@ -31,13 +31,9 @@ private slots:
     void handleInserCardClick();
     void receiveLogin(bool);
     //RFID
-    void openPort();
     void receiveCardCheck(bool);
-<<<<<<< HEAD
     void showWindow();
-=======
-    void on_LoginBT_clicked();
->>>>>>> main
+
 
 private:
     Ui::MainWindow *ui;

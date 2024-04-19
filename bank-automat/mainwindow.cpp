@@ -92,7 +92,7 @@ void MainWindow::accountButtonHandler()
         ui->stackedWidget->setCurrentIndex(2);
     }
 
-    else if(button->objectName()== "TILITIEDOT_BT"){
+    else if(button->objectName()== "TILITAPAHTUMAT_BT"){
         ui->stackedWidget->setCurrentIndex(3);
     }
     else if(button->objectName()== "SALDO_BT"){

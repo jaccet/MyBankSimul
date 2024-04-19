@@ -19,7 +19,7 @@ MainWindow::MainWindow(QWidget *parent)
     restPtr = new REST_API;
     connect(restPtr, SIGNAL(cardChecked(bool)), this, SLOT(receiveCardCheck(bool)));
     this->setStyleSheet("background-color: lightblue;");
-    QList<QPushButton*> accountButtonList = {ui->LOPETA_BT, ui->OTTO_BT, ui->SALDO_BT, ui->TAKAISIN_BT, ui->TILITAPAHTUMAT_BT};
+    QList<QPushButton*> accountButtonList = {ui->LOPETA_BT, ui->OTTO_BT, ui->SALDO_BT, ui->TAKAISIN_BT, ui->TILITAPAHTUMAT_BT, ui->OTTO_TAKAISIN, ui->TILITAPAHTUMAT_TAKAISIN, ui->SALDO_TAKAISIN};
     for(QPushButton *button:accountButtonList){
         connect(button,SIGNAL(clicked(bool)),
                 this,SLOT(accountButtonHandler()));
@@ -92,7 +92,7 @@ void MainWindow::accountButtonHandler()
         ui->stackedWidget->setCurrentIndex(2);
     }
 
-    else if(button->objectName()== "TILITIEDOT_BT"){
+    else if(button->objectName()== "TILITAPAHTUMAT_BT"){
         ui->stackedWidget->setCurrentIndex(3);
     }
     else if(button->objectName()== "SALDO_BT"){
@@ -100,6 +100,15 @@ void MainWindow::accountButtonHandler()
     }
     else if(button->objectName()== "TAKAISIN_BT"){
         ui->stackedWidget->setCurrentIndex(0);
+    }
+    else if(button->objectName()== "OTTO_TAKAISIN"){
+        ui->stackedWidget->setCurrentIndex(1);
+    }
+    else if(button->objectName()== "SALDO_TAKAISIN"){
+        ui->stackedWidget->setCurrentIndex(1);
+    }
+    else if(button->objectName()== "TILITAPAHTUMAT_TAKAISIN"){
+        ui->stackedWidget->setCurrentIndex(1);
     }
     else{
         this->close();

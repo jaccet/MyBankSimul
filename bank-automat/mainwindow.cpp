@@ -8,7 +8,8 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
-    //ui->setupUi(this);
+    ui->setupUi(this);
+    ui->stackedWidget->setCurrentIndex(0);
     qDebug() << "menee tänne";
     rfidPtr = new rfid(this);
     rfidPtr->portInfo();
@@ -53,10 +54,7 @@ void MainWindow::receiveLogin(bool loginResponse)
 
     else {
         qDebug()<< "Oikein meni";
-        pankkiPtr = new pankkiSivu(this,restPtr);
-        connect(pankkiPtr,SIGNAL(testSignal()),this,SLOT(showWindow()));
-        pankkiPtr->show();
-        this->hide();
+        ui->stackedWidget->setCurrentIndex(1);
     }
 
 }

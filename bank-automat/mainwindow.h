@@ -34,6 +34,8 @@ private slots:
     void receiveCardCheck(bool);
     void showWindow();
 
+    void on_stackedWidget_currentChanged(int arg1);
+
 private:
     Ui::MainWindow *ui;
     pankkiSivu * pankkiPtr;

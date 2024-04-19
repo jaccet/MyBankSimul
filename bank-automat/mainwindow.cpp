@@ -43,6 +43,7 @@ void MainWindow::handleInserCardClick()
 
 void MainWindow::receiveLogin(bool loginResponse)
 {
+    // Tämä kusee korjattava ettei aukea portti kun pinui destructoituu kun pankkisivu on päällä.
     qDebug()<<"login funktiossa";
     if (loginResponse == false){
         qDebug()<< "Väärin meni";

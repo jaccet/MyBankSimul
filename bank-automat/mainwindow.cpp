@@ -44,10 +44,6 @@ void MainWindow::handleInserCardClick()
 
 }
 
-<<<<<<< HEAD
-//PIN
-=======
->>>>>>> f9b36a2a8cf9ff1a620835af8b445593ae665ed3
 void MainWindow::receiveLogin(bool loginResponse)
 {
     qDebug()<<"login funktiossa";

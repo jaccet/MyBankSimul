@@ -20,6 +20,7 @@ public:
     QByteArray readPort();
     QSerialPort * serialPort;
     QString portNumber;
+    QString SerInfo;
 
 };
 

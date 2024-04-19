@@ -9,6 +9,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    ui->stackedWidget->setCurrentIndex(0);
     qDebug() << "menee tänne";
     rfidPtr = new rfid(this);
     rfidPtr->portInfo();
@@ -16,7 +17,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(rfidPtr->serialPort, SIGNAL(readyRead()), this,SLOT(handleInserCardClick())); // Täytyy käyttää että connectautuu readRead() signaliin, lukemista varten.
     restPtr = new REST_API;
     connect(restPtr, SIGNAL(cardChecked(bool)), this, SLOT(receiveCardCheck(bool)));
-    this->setStyleSheet("background-color: darkred;");
+    //this->setStyleSheet("background-color: darkred;");
 }
 
 
@@ -53,10 +54,7 @@ void MainWindow::receiveLogin(bool loginResponse)
 
     else {
         qDebug()<< "Oikein meni";
-        pankkiPtr = new pankkiSivu(this,restPtr);
-        connect(pankkiPtr,SIGNAL(testSignal()),this,SLOT(showWindow()));
-        pankkiPtr->show();
-        this->hide();
+        ui->stackedWidget->setCurrentIndex(1);
     }
 
 }

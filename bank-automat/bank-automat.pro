@@ -11,19 +11,16 @@ CONFIG += c++17
 SOURCES += \
     main.cpp \
     mainwindow.cpp \
-    pankkisivu.cpp \
     pinui.cpp \
     rifd.cpp
 
 HEADERS += \
     mainwindow.h \
-    pankkisivu.h \
     pinui.h \
     rifd.h
 
 FORMS += \
     mainwindow.ui \
-    pankkisivu.ui \
     pinui.ui
 
 # Default rules for deployment.

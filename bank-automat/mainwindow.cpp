@@ -9,6 +9,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    this->setAttribute(Qt::WA_DeleteOnClose);
     ui->stackedWidget->setCurrentIndex(0);
     qDebug() << "menee tänne";
     rfidPtr = new rfid(this);
@@ -17,7 +18,12 @@ MainWindow::MainWindow(QWidget *parent)
     connect(rfidPtr->serialPort, SIGNAL(readyRead()), this,SLOT(handleInserCardClick())); // Täytyy käyttää että connectautuu readRead() signaliin, lukemista varten.
     restPtr = new REST_API;
     connect(restPtr, SIGNAL(cardChecked(bool)), this, SLOT(receiveCardCheck(bool)));
-    //this->setStyleSheet("background-color: darkred;");
+    this->setStyleSheet("background-color: lightblue;");
+    QList<QPushButton*> accountButtonList = {ui->LOPETA_BT, ui->OTTO_BT, ui->SALDO_BT, ui->TAKAISIN_BT, ui->TILITAPAHTUMAT_BT};
+    for(QPushButton *button:accountButtonList){
+        connect(button,SIGNAL(clicked(bool)),
+                this,SLOT(accountButtonHandler()));
+    }
 }
 
 
@@ -77,4 +83,25 @@ void MainWindow::showWindow()
 {
     qDebug() << "signaali läpi";
     this->show();
+}
+
+void MainWindow::accountButtonHandler()
+{
+    QPushButton *button =qobject_cast<QPushButton*>(sender());
+    if(button->objectName()== "OTTO_BT"){
+        ui->stackedWidget->setCurrentIndex(2);
+    }
+
+    else if(button->objectName()== "TILITIEDOT_BT"){
+        ui->stackedWidget->setCurrentIndex(3);
+    }
+    else if(button->objectName()== "SALDO_BT"){
+        ui->stackedWidget->setCurrentIndex(4);
+    }
+    else if(button->objectName()== "TAKAISIN_BT"){
+        ui->stackedWidget->setCurrentIndex(0);
+    }
+    else{
+        this->close();
+    }
 }

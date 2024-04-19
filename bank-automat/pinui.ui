@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>416</width>
-    <height>236</height>
+    <width>352</width>
+    <height>226</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -111,6 +111,11 @@
          </item>
          <item row="0" column="1">
           <widget class="QPushButton" name="button2">
+           <property name="font">
+            <font>
+             <family>Franklin Gothic Heavy</family>
+            </font>
+           </property>
            <property name="text">
             <string>2</string>
            </property>

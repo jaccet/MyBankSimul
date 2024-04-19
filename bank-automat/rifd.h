@@ -22,6 +22,7 @@ public:
     QString portNumber;
     QString serInfo;
 
+
 };
 
 #endif // RIFD_H

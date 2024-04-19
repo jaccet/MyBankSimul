@@ -51,11 +51,16 @@ void MainWindow::receiveLogin(bool loginResponse)
         qDebug()<< "Väärin meni";
         rfidPtr->openPort();
         connect(rfidPtr->serialPort, SIGNAL(readyRead()), this,SLOT(handleInserCardClick()));
-    } else {
-        pankkiPtr = new pankkiSivu(this,restPtr);
-        pankkiPtr->show();
-        close();
     }
+
+    else {
+        qDebug()<< "Oikein meni";
+        pankkiPtr = new pankkiSivu(this,restPtr);
+        connect(pankkiPtr,SIGNAL(testSignal()),this,SLOT(showWindow()));
+        pankkiPtr->show();
+        this->hide();
+    }
+
 }
 
 void MainWindow::receiveCardCheck(bool cardCheckResult)
@@ -70,4 +75,10 @@ void MainWindow::receiveCardCheck(bool cardCheckResult)
         connect(pinpointer,SIGNAL(loginResultFromPinUI(bool)),this,SLOT(receiveLogin(bool)));
         pinpointer->show();
     }
+}
+
+void MainWindow::showWindow()
+{
+    qDebug() << "signaali läpi";
+    this->show();
 }

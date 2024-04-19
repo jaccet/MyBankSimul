@@ -19,6 +19,8 @@ public:
 private:
     Ui::pankkiSivu *ui;
     REST_API *restPtr;
+signals:
+    void testSignal();
 };
 
 #endif // PANKKISIVU_H

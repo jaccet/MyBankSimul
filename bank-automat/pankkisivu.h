@@ -25,8 +25,12 @@ private slots:
 private:
     Ui::pankkiSivu *ui;
     REST_API *restPtr;
+
 signals:
     void testSignal();
+    void transSignal();
+    void ottoSignal();
+    void tilitapahtumatSignal();
 
 };
 

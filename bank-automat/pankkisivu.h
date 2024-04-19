@@ -16,11 +16,18 @@ public:
     explicit pankkiSivu(QWidget *parent = nullptr, REST_API *rest=nullptr);
     ~pankkiSivu();
 
+private slots:
+
+    void takaisinJaLopetaHandler();
+    void tiliHallintaHandler();
+
+
 private:
     Ui::pankkiSivu *ui;
     REST_API *restPtr;
 signals:
     void testSignal();
+
 };
 
 #endif // PANKKISIVU_H

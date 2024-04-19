@@ -1,7 +1,7 @@
 #include "pinui.h"
 #include "ui_pinui.h"
 
-
+// Täytyy korjata kun pinui tuhoutuu että RFID portti ei aukea uudelleen.
 pinUI::pinUI(QWidget *parent,REST_API *rest) :
     QDialog(parent),
     ui(new Ui::pinUI)

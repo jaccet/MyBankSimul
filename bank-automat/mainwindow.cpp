@@ -31,21 +31,19 @@ MainWindow::~MainWindow()
 
 void MainWindow::handleInserCardClick()
 {
-    //RFID
-
-    QByteArray rD = rfidPtr->readPort();    // Tallettaa luetun serialport datan
-    rfidPtr->closePort();                   // Sulkee portin
-    qDebug() << rD;                         // Debuggeri koko datalle mitä serialportista tulee
-    userid=rD;                              // Katsoo käyttäjää ja luo siitä käsiteltävän muodon.
-    userid.remove(0,7);                     // Remove(*,*) katsoo 1 arvossa että mistä lähdetään liikkeelle ja luku 7 osoittaa poistettujen merkkien määrää
-    userid.chop(3);                         // Poistaa 3 merkkiä datan loppupäästä
-    qDebug() << userid;                     // Debuggeri leikatulle käyttäjä tunnukselle.
-    restPtr->checkCard(userid);             // Pointteri RestAPI:n checkCard functioon
-
+    QByteArray rD = rfidPtr->readPort();        // Tallettaa luetun serialport datan
+    rfidPtr->closePort();                       // Sulkee portin
+    qDebug() << rD;                             // Debuggeri koko datalle mitä serialportista tulee
+    userid=rD;                                  // Katsoo käyttäjää ja luo siitä käsiteltävän muodon.
+    userid.remove(0,7);                         // Remove(*,*) katsoo 1 arvossa että mistä lähdetään liikkeelle ja luku 7 osoittaa poistettujen merkkien määrää
+    userid.chop(3);                             // Poistaa 3 merkkiä datan loppupäästä
+    qDebug() << userid;                         // Debuggeri leikatulle käyttäjä tunnukselle.
+    restPtr->checkCard(userid);                 // Pointteri RestAPI:n checkCard functioon
 }
 
 void MainWindow::receiveLogin(bool loginResponse)
 {
+    // Tämä kusee korjattava ettei aukea portti kun pinui destructoituu kun pankkisivu on päällä.
     qDebug()<<"login funktiossa";
     if (loginResponse == false){
         qDebug()<< "Väärin meni";

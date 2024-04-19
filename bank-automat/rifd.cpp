@@ -24,7 +24,7 @@ void rfid::openPort()               // Opening ports for later use.
 
 void rfid::closePort()              // Function for closing serialport.
 {
-
+    qDebug() << "portti sulettu";
     serialPort->close();
 
 }

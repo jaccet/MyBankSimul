@@ -40,9 +40,9 @@ void rfid::portInfo()
     const auto serialPortInfos = QSerialPortInfo::availablePorts();
     for (const QSerialPortInfo &portInfo : serialPortInfos) {
         qDebug() << "Manufacturer:" << portInfo.serialNumber();
-        SerInfo = portInfo.serialNumber();
+        serInfo = portInfo.serialNumber();
 
-        if(SerInfo == "OL56E09005B8EC2") {                  // Täytyy testata eliaksen koneella.
+        if(serInfo == "OL56E09005B8EC2") {                  // Katso RFID lukijan sarjanumeron ja tallettaa sillä käytössä olevan portin käyttöä varten
             qDebug() << "Port:" << portInfo.portName();
             portNumber = portInfo.portName();
         }

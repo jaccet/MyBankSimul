@@ -60,7 +60,7 @@
        </widget>
       </item>
       <item row="2" column="0">
-       <widget class="QPushButton" name="LOPETA_LB_2">
+       <widget class="QPushButton" name="LOPETA_BT">
         <property name="font">
          <font>
           <family>Webdings</family>

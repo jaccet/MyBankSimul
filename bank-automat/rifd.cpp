@@ -8,12 +8,12 @@ void rfid::openPort()                                                       // P
 {
 
     qDebug() << "Handling port opening";                                    //
-    serialPort = new QSerialPort(this);                                     //
+    serialPort = new QSerialPort(this);                                     // Luodaan avoin portti.
     serialPort->setPortName(portNumber);                                    //
     serialPort->setBaudRate(QSerialPort::Baud9600);                         //
     serialPort->setDataBits(QSerialPort::Data8);                            //
 
-        if (serialPort->open(QIODevice::ReadOnly)) {                        //
+        if (serialPort->open(QIODevice::ReadOnly)) {                        // Debuggeri avoimelle portille.
             qDebug() << "Serialport opened successfully.";                  //
         }
         else {                                                              // Error viesti epäonnistuneen portin avaamisen yhteydessä
@@ -26,7 +26,7 @@ void rfid::closePort()                                                      // S
 {
 
     serialPort->close();
-
+    qDebug() << "Port closed successfully."
 }
 
 QByteArray rfid::readPort()                                                 // Palautetaan kortista luettu data, MainWindowi:in.

@@ -34,7 +34,6 @@ private slots:
     void receiveCardCheck(bool);
     void showWindow();
 
-
 private:
     Ui::MainWindow *ui;
     pankkiSivu * pankkiPtr;

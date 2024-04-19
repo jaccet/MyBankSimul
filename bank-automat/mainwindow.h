@@ -33,6 +33,7 @@ private slots:
     //RFID
     void receiveCardCheck(bool);
     void showWindow();
+    void accountButtonHandler();
 
 private:
     Ui::MainWindow *ui;

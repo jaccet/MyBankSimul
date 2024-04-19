@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1200</width>
-    <height>600</height>
+    <width>619</width>
+    <height>419</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,10 +17,10 @@
    <widget class="QStackedWidget" name="stackedWidget">
     <property name="geometry">
      <rect>
-      <x>50</x>
-      <y>20</y>
-      <width>641</width>
-      <height>411</height>
+      <x>0</x>
+      <y>0</y>
+      <width>621</width>
+      <height>391</height>
      </rect>
     </property>
     <property name="font">
@@ -32,7 +32,7 @@
      <number>-1</number>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>3</number>
     </property>
     <widget class="QWidget" name="aloitus"/>
     <widget class="QWidget" name="pankkisivu">
@@ -232,32 +232,124 @@
      </widget>
     </widget>
     <widget class="QWidget" name="Otto">
-     <widget class="QLabel" name="label">
+     <widget class="QLabel" name="label_5">
       <property name="geometry">
        <rect>
-        <x>280</x>
-        <y>180</y>
-        <width>111</width>
-        <height>91</height>
+        <x>10</x>
+        <y>40</y>
+        <width>251</width>
+        <height>16</height>
        </rect>
       </property>
-      <property name="text">
-       <string>Otto</string>
+      <property name="font">
+       <font>
+        <family>Arial</family>
+        <pointsize>12</pointsize>
+        <bold>true</bold>
+       </font>
       </property>
+      <property name="text">
+       <string>VALITSE NOSTETTAVA SUMMA</string>
+      </property>
+     </widget>
+     <widget class="QWidget" name="formLayoutWidget">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>70</y>
+        <width>253</width>
+        <height>85</height>
+       </rect>
+      </property>
+      <layout class="QFormLayout" name="formLayout_3">
+       <item row="0" column="0">
+        <widget class="QPushButton" name="pushButton">
+         <property name="text">
+          <string>10€</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QPushButton" name="pushButton_3">
+         <property name="text">
+          <string>50€</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QPushButton" name="pushButton_2">
+         <property name="text">
+          <string>20€</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QPushButton" name="pushButton_4">
+         <property name="text">
+          <string>100€</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QPushButton" name="OTTO_TAKAISIN">
+         <property name="font">
+          <font>
+           <family>Webdings</family>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>3</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QLabel" name="label_4">
+         <property name="font">
+          <font>
+           <family>Arial</family>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>TAKAISIN ALOITUKSEEN</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </widget>
     </widget>
     <widget class="QWidget" name="tilitiedot">
      <widget class="QLabel" name="label_2">
       <property name="geometry">
        <rect>
-        <x>280</x>
-        <y>160</y>
-        <width>71</width>
+        <x>120</x>
+        <y>20</y>
+        <width>101</width>
         <height>41</height>
        </rect>
       </property>
       <property name="text">
-       <string>TILITIEDOT</string>
+       <string>TILITAPAHTUMAT</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="TILITAPAHTUMAT_TAKAISIN">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>30</y>
+        <width>75</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Webdings</family>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>3</string>
       </property>
      </widget>
     </widget>
@@ -275,6 +367,25 @@
        <string>SALDO</string>
       </property>
      </widget>
+     <widget class="QPushButton" name="SALDO_TAKAISIN">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>20</y>
+        <width>75</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Webdings</family>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>3</string>
+      </property>
+     </widget>
     </widget>
    </widget>
   </widget>
@@ -283,7 +394,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1200</width>
+     <width>619</width>
      <height>22</height>
     </rect>
    </property>

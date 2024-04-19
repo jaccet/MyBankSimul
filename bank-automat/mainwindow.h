@@ -30,10 +30,9 @@ signals:
 private slots:
     void handleInserCardClick();
     void receiveLogin(bool);
-    void handlePinNumberRead(QString);
     //RFID
-    void openPort();
     void receiveCardCheck(bool);
+    void showWindow();
 
 private:
     Ui::MainWindow *ui;

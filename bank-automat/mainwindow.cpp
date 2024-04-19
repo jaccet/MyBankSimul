@@ -52,6 +52,7 @@ void MainWindow::receiveLogin(bool loginResponse)
         rfidPtr->openPort();
         connect(rfidPtr->serialPort, SIGNAL(readyRead()), this,SLOT(handleInserCardClick()));
     }
+
     else {
         qDebug()<< "Oikein meni";
         pankkiPtr = new pankkiSivu(this,restPtr);
@@ -59,6 +60,7 @@ void MainWindow::receiveLogin(bool loginResponse)
         pankkiPtr->show();
         this->hide();
     }
+
 }
 
 void MainWindow::receiveCardCheck(bool cardCheckResult)

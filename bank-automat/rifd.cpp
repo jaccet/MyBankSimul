@@ -42,7 +42,11 @@ void rfid::portInfo()
         qDebug() << "Manufacturer:" << portInfo.serialNumber();
         SerInfo = portInfo.serialNumber();
 
+<<<<<<< HEAD
         if(SerInfo == "OL56E09005B8EC2") {
+=======
+        if(SerInfo == "OL56E09005B8EC2") {                  // Täytyy testata eliaksen koneella.
+>>>>>>> cbdb0f26d222fc64b131d87c24cac466f46eb87a
             qDebug() << "Port:" << portInfo.portName();
             portNumber = portInfo.portName();
         }

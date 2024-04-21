@@ -30,7 +30,7 @@ router.get('/info/:card_no',function(request,response){
         if(err){
             response.send(err);
         } else {
-            request.json(result);
+            response.json(result);
         }
     });
 });

@@ -5,6 +5,7 @@
 #include <QByteArray>
 #include <QtSerialPort>
 #include <QDebug>
+#include <QMessageBox>
 
 #include "rest_api.h"
 #include "rifd.h"
@@ -34,6 +35,10 @@ private slots:
     void receiveCardCheck(bool);
     void showWindow();
     void accountButtonHandler();
+    void ottoButtonHandler();
+    void connectioErrorHandler();
+    void transactionInfoReceiver(QString);
+    void accountLogisticsReceiver(QString);
 
 private:
     Ui::MainWindow *ui;

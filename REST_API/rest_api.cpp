@@ -73,8 +73,8 @@ void REST_API::loginSlot(QNetworkReply *reply)
         if(responseData!="false"){
             //kirjautuminen onnistui
             webtoken=responseData;
-            emit loginSuccessful(true);
             getAndSetAccountIBAN();
+            emit loginSuccessful(true);
         }
         else{
             qDebug()<<"Wrong Card or Pin";
@@ -91,14 +91,22 @@ void REST_API::transactionSlot(QNetworkReply *reply)
     responseData=reply->readAll();
     //qDebug()<<response_data;
     QJsonDocument json_doc = QJsonDocument::fromJson(responseData);
-    QJsonObject json_obj = json_doc.object();
-    qDebug()<<json_obj;
+    QJsonArray json_array = json_doc.array();
+    QString transactions = "Tyyppi | Pvm | Määrä\n";
+    foreach(const QJsonValue &value,json_array){
+        QJsonObject json_obj = value.toObject();
+        transactions+=json_obj["type"].toString()+" | ";
+        transactions+=json_obj["date"].toString()+" | ";
+        transactions+=json_obj["amount"].toString();
+        transactions+="\n";
+    }
+    qDebug()<<json_doc;
     if(responseData=="-4078" || responseData.length()==0){
         qDebug()<<"Connection Error!";
         emit connectionError();
     }
     else {
-        emit transactionInfoReceived(json_obj);
+        emit transactionInfoReceived(transactions);
     }
 
     reply->deleteLater();
@@ -108,16 +116,20 @@ void REST_API::transactionSlot(QNetworkReply *reply)
 void REST_API::accountLogisticSlot(QNetworkReply *reply)
 {
     responseData=reply->readAll();
-    //qDebug()<<response_data;
+    qDebug()<<responseData;
     QJsonDocument json_doc = QJsonDocument::fromJson(responseData);
-    QJsonObject json_obj = json_doc.object();
-    qDebug()<<json_obj;
+    QJsonArray json_array = json_doc.array();
+    QJsonObject json_obj;
+    foreach(const QJsonValue &value,json_array){
+        json_obj = value.toObject();
+    }
+    QString logistics = "Tilin saldo: "+json_obj["balance"].toString()+"\nTilin korko: "+json_obj["interest"].toString()+"\nLuottoraja: "+json_obj["credit_limit"].toString();
+    qDebug()<<logistics;
     if(responseData=="-4078" || responseData.length()==0){
         qDebug()<<"Connection Error!";
         emit connectionError();
     } else {
-        balance = json_obj["balance"].toDouble();
-        emit accountLogisticsReceived(json_obj);
+        emit accountLogisticsReceived(logistics);
     }
     reply->deleteLater();
     infoManager->deleteLater();
@@ -127,18 +139,29 @@ void REST_API::withdrawalSlot(QNetworkReply *reply)
 {
     responseData=reply->readAll();
 
-    qDebug()<<responseData;
+    if(responseData=="-4078" || responseData.length()==0){
+        qDebug()<<"Connection Error!";
+        emit connectionError();
+    } else {
+        qDebug()<<responseData;
+    }
 }
 
 void REST_API::IBANSlot(QNetworkReply *reply)
 {
     responseData=reply->readAll();
+    QJsonDocument json_doc = QJsonDocument::fromJson(responseData);
+    QJsonArray json_array = json_doc.array();
+    QJsonObject json_obj;
+    foreach(const QJsonValue &value,json_array){
+        json_obj = value.toObject();
+    }
     if(responseData=="-4078" || responseData.length()==0){
         qDebug()<<"Connection Error!";
         emit connectionError();
     } else {
         //qDebug()<<response_data;
-        IBAN = responseData;
+        IBAN = json_obj["IBAN_no"].toString();
     }
     reply->deleteLater();
     infoManager->deleteLater();
@@ -186,7 +209,7 @@ void REST_API::getTransactions()
 
 void REST_API::getAccountLogistics()
 {
-    QString site_url=base_url+"account/"+card_no;
+    QString site_url=base_url+"account/info/"+card_no;
     QNetworkRequest request((site_url));
     //WEBTOKEN ALKU
     QByteArray requestToken="Bearer "+webtoken;
@@ -203,10 +226,11 @@ void REST_API::withdrawalOperation(double amount)
 {
     QJsonObject jsonObj;
 
-    jsonObj.insert("IBAN_no",IBAN);
     jsonObj.insert("amount",amount);
+    qDebug()<<jsonObj;
 
-    QString site_url=base_url+"transaction/withdrawal";
+    qDebug()<<IBAN;
+    QString site_url=base_url+"transaction/withdrawal/"+IBAN;
     QNetworkRequest request((site_url));
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
     //WEBTOKEN ALKU
@@ -218,4 +242,11 @@ void REST_API::withdrawalOperation(double amount)
     connect(infoManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(withdrawalSlot(QNetworkReply*)));
 
     reply = infoManager->post(request,QJsonDocument(jsonObj).toJson());
+}
+
+void REST_API::resetAll()
+{
+    card_no=NULL;
+    IBAN=NULL;
+    webtoken=NULL;
 }

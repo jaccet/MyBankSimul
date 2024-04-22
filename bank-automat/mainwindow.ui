@@ -34,7 +34,7 @@
      <number>-1</number>
     </property>
     <property name="currentIndex">
-     <number>3</number>
+     <number>4</number>
     </property>
     <widget class="QWidget" name="aloitus"/>
     <widget class="QWidget" name="pankkisivu">
@@ -270,35 +270,28 @@
       </property>
       <layout class="QFormLayout" name="formLayout_3">
        <item row="0" column="0">
-        <widget class="QPushButton" name="nosto_10">
+        <widget class="QPushButton" name="OTTO_10E_BT">
          <property name="text">
           <string>10€</string>
          </property>
         </widget>
        </item>
-       <item row="1" column="0">
-        <widget class="QPushButton" name="nosto_20">
-         <property name="text">
-          <string>20€</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="0">
-        <widget class="QPushButton" name="nosto_50">
+       <item row="0" column="1">
+        <widget class="QPushButton" name="OTTO_50E_BT">
          <property name="text">
           <string>50€</string>
          </property>
         </widget>
        </item>
-       <item row="0" column="1">
-        <widget class="QPushButton" name="Nosto_100">
+       <item row="1" column="0">
+        <widget class="QPushButton" name="OTTO_20E_BT">
          <property name="text">
           <string>100€</string>
          </property>
         </widget>
        </item>
        <item row="1" column="1">
-        <widget class="QPushButton" name="Nosto_150">
+        <widget class="QPushButton" name="OTTO_100E_BT">
          <property name="text">
           <string>150€</string>
          </property>
@@ -386,166 +379,41 @@
        <string>3</string>
       </property>
      </widget>
-     <widget class="QWidget" name="verticalLayoutWidget">
+     <widget class="QLabel" name="TILITAPAHTUMAT_LABEL">
       <property name="geometry">
        <rect>
-        <x>110</x>
-        <y>60</y>
-        <width>231</width>
-        <height>161</height>
+        <x>90</x>
+        <y>100</y>
+        <width>431</width>
+        <height>231</height>
        </rect>
       </property>
-      <property name="font">
-       <font>
-        <family>Arial</family>
-        <pointsize>20</pointsize>
-        <bold>true</bold>
-       </font>
+      <property name="text">
+       <string>TextLabel</string>
       </property>
-      <layout class="QVBoxLayout" name="verticalLayout">
-       <item>
-        <widget class="QLabel" name="TAPAHTUMA1">
-         <property name="font">
-          <font>
-           <family>Arial</family>
-           <pointsize>20</pointsize>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="frameShape">
-          <enum>QFrame::Box</enum>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLabel" name="TAPAHTUMA2">
-         <property name="font">
-          <font>
-           <family>Arial</family>
-           <pointsize>20</pointsize>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="frameShape">
-          <enum>QFrame::Box</enum>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLabel" name="TAPAHTUMA3">
-         <property name="font">
-          <font>
-           <family>Arial</family>
-           <pointsize>20</pointsize>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="frameShape">
-          <enum>QFrame::Box</enum>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </widget>
-     <widget class="QWidget" name="verticalLayoutWidget_2">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>60</y>
-        <width>81</width>
-        <height>161</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>Arial</family>
-        <pointsize>20</pointsize>
-        <bold>true</bold>
-       </font>
-      </property>
-      <layout class="QVBoxLayout" name="verticalLayout_2">
-       <item>
-        <widget class="QLabel" name="label_4">
-         <property name="font">
-          <font>
-           <family>Arial</family>
-           <pointsize>20</pointsize>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="text">
-          <string>1</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLabel" name="label">
-         <property name="font">
-          <font>
-           <family>Arial</family>
-           <pointsize>20</pointsize>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="text">
-          <string>2</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLabel" name="label_6">
-         <property name="font">
-          <font>
-           <family>Arial</family>
-           <pointsize>20</pointsize>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="text">
-          <string>3</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-         </property>
-        </widget>
-       </item>
-      </layout>
      </widget>
     </widget>
     <widget class="QWidget" name="saldo">
-     <widget class="QLabel" name="label_3">
+     <widget class="QLabel" name="SALDO_LABEL">
       <property name="geometry">
        <rect>
-        <x>170</x>
-        <y>-10</y>
-        <width>251</width>
-        <height>71</height>
+        <x>130</x>
+        <y>20</y>
+        <width>431</width>
+        <height>241</height>
        </rect>
       </property>
       <property name="font">
        <font>
-        <family>Source Serif Pro Black</family>
-        <pointsize>24</pointsize>
+        <pointsize>14</pointsize>
         <bold>true</bold>
        </font>
       </property>
       <property name="text">
        <string>SALDO</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
       </property>
      </widget>
      <widget class="QPushButton" name="SALDO_TAKAISIN">
@@ -650,8 +518,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>674</width>
-     <height>22</height>
+     <width>619</width>
+     <height>21</height>
     </rect>
    </property>
   </widget>

@@ -19,6 +19,8 @@ public:
     void portInfo();
     QByteArray readPort();
     QSerialPort * serialPort;
+
+private:
     QString portNumber;
     QString serInfo;
 

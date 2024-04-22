@@ -33,7 +33,6 @@ private slots:
     void receiveLogin(bool);
     //RFID
     void receiveCardCheck(bool);
-    void showWindow();
     void accountButtonHandler();
     void ottoButtonHandler();
     void connectioErrorHandler();
@@ -47,5 +46,6 @@ private:
     rfid * rfidPtr;
     QByteArray userid;
     REST_API * restPtr;
+    int testi=0;
 };
 #endif // MAINWINDOW_H

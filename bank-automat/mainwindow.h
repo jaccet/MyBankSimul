@@ -46,6 +46,5 @@ private:
     rfid * rfidPtr;
     QByteArray userid;
     REST_API * restPtr;
-    int testi=0;
 };
 #endif // MAINWINDOW_H

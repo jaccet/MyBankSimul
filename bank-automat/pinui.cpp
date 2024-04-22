@@ -119,8 +119,8 @@ void pinUI::lockHandler() // Toiminnolla lukitaan näppä
         button->setEnabled(false);
         }
         qDebug() << "napit disabloitu";
-        QTimer::singleShot(10000, this, SLOT(reEnableOrClose()));
-        emit loginResultFromPinUI(false);
+        QTimer::singleShot(2500, this, SLOT(reEnableOrClose()));
+
     }
     if(isCorrect == true)
     {

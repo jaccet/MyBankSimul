@@ -33,7 +33,6 @@ private slots:
     void receiveLogin(bool);
     //RFID
     void receiveCardCheck(bool);
-    void showWindow();
     void accountButtonHandler();
     void ottoButtonHandler();
     void connectioErrorHandler();

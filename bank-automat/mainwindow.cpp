@@ -57,9 +57,7 @@ void MainWindow::handleInserCardClick()
 
 void MainWindow::receiveLogin(bool loginResponse)
 {
-    // Tämä kusee korjattava ettei aukea portti kun pinui destructoituu kun pankkisivu on päällä.
-    qDebug()<<"login funktiossa";
-    if (loginResponse == false){
+    if (loginResponse == false && ui->stackedWidget->currentIndex() == 0){
         qDebug()<< "Väärin meni";
         rfidPtr->openPort();
         connect(rfidPtr->serialPort, SIGNAL(readyRead()), this,SLOT(handleInserCardClick()));
@@ -69,7 +67,6 @@ void MainWindow::receiveLogin(bool loginResponse)
         qDebug()<< "Oikein meni";
         ui->stackedWidget->setCurrentIndex(1);
     }
-
 }
 
 void MainWindow::receiveCardCheck(bool cardCheckResult)
@@ -84,12 +81,6 @@ void MainWindow::receiveCardCheck(bool cardCheckResult)
         connect(pinpointer,SIGNAL(loginResultFromPinUI(bool)),this,SLOT(receiveLogin(bool)));
         pinpointer->show();
     }
-}
-
-void MainWindow::showWindow()
-{
-    qDebug() << "signaali läpi";
-    this->show();
 }
 
 void MainWindow::accountButtonHandler()
@@ -109,10 +100,13 @@ void MainWindow::accountButtonHandler()
     }
     else if(button->objectName()== "TAKAISIN_BT"){
         ui->stackedWidget->setCurrentIndex(0);
+        rfidPtr->openPort();
+        connect(rfidPtr->serialPort, SIGNAL(readyRead()), this,SLOT(handleInserCardClick()));
         restPtr->resetAll();
     }
     else if(button->objectName()== "OTTO_TAKAISIN"){
         ui->stackedWidget->setCurrentIndex(1);
+
     }
     else if(button->objectName()== "SALDO_TAKAISIN"){
         ui->stackedWidget->setCurrentIndex(1);

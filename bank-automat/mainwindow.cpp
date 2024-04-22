@@ -21,6 +21,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(restPtr, SIGNAL(connectionError()),this,SLOT(connectioErrorHandler()));
     connect(restPtr, SIGNAL(transactionInfoReceived(QString)),this,SLOT(transactionInfoReceiver(QString)));
     connect(restPtr, SIGNAL(accountLogisticsReceived(QString)),this,SLOT(accountLogisticsReceiver(QString)));
+    connect(restPtr, SIGNAL(loginSuccessful(bool)),this,SLOT(loginCheck(bool)));
     this->setStyleSheet("background-color: lightblue;");
     QList<QPushButton*> accountButtonList = {ui->LOPETA_BT, ui->OTTO_BT, ui->SALDO_BT, ui->TAKAISIN_BT, ui->TILITAPAHTUMAT_BT, ui->OTTO_TAKAISIN, ui->TILITAPAHTUMAT_TAKAISIN, ui->SALDO_TAKAISIN};
     QList<QPushButton*> ottoButtonList = {ui->OTTO_10E_BT,ui->OTTO_20E_BT,ui->OTTO_50E_BT,ui->OTTO_100E_BT};
@@ -55,11 +56,15 @@ void MainWindow::handleInserCardClick()
     restPtr->checkCard(userid);                 // Pointteri RestAPI:n checkCard functioon
 }
 
-void MainWindow::receiveLogin(bool loginResponse)
+void MainWindow::receiveLogin(QString pinNmr)
 {
-    // Tämä kusee korjattava ettei aukea portti kun pinui destructoituu kun pankkisivu on päällä.
-    qDebug()<<"login funktiossa";
-    if (loginResponse == false){
+    qDebug() << "numero on : " << pinNmr;
+    restPtr->requestLogin(pinNmr);
+}
+
+void MainWindow::loginCheck(bool loginResponse)
+{
+    if (loginResponse == false && ui->stackedWidget->currentIndex() == 0){
         qDebug()<< "Väärin meni";
         rfidPtr->openPort();
         connect(rfidPtr->serialPort, SIGNAL(readyRead()), this,SLOT(handleInserCardClick()));
@@ -69,7 +74,6 @@ void MainWindow::receiveLogin(bool loginResponse)
         qDebug()<< "Oikein meni";
         ui->stackedWidget->setCurrentIndex(1);
     }
-
 }
 
 void MainWindow::receiveCardCheck(bool cardCheckResult)
@@ -80,16 +84,10 @@ void MainWindow::receiveCardCheck(bool cardCheckResult)
         connect(rfidPtr->serialPort, SIGNAL(readyRead()), this,SLOT(handleInserCardClick()));
     }
     else {
-        pinpointer = new pinUI(this,restPtr);
-        connect(pinpointer,SIGNAL(loginResultFromPinUI(bool)),this,SLOT(receiveLogin(bool)));
+        pinpointer = new pinUI(this);
+        connect(pinpointer,SIGNAL(PINFromPinUI(QString)),this,SLOT(receiveLogin(QString)));
         pinpointer->show();
     }
-}
-
-void MainWindow::showWindow()
-{
-    qDebug() << "signaali läpi";
-    this->show();
 }
 
 void MainWindow::accountButtonHandler()
@@ -109,10 +107,13 @@ void MainWindow::accountButtonHandler()
     }
     else if(button->objectName()== "TAKAISIN_BT"){
         ui->stackedWidget->setCurrentIndex(0);
+        rfidPtr->openPort();
+        connect(rfidPtr->serialPort, SIGNAL(readyRead()), this,SLOT(handleInserCardClick()));
         restPtr->resetAll();
     }
     else if(button->objectName()== "OTTO_TAKAISIN"){
         ui->stackedWidget->setCurrentIndex(1);
+
     }
     else if(button->objectName()== "SALDO_TAKAISIN"){
         ui->stackedWidget->setCurrentIndex(1);

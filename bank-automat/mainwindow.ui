@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>619</width>
-    <height>419</height>
+    <width>674</width>
+    <height>464</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,14 +17,16 @@
    <widget class="QStackedWidget" name="stackedWidget">
     <property name="geometry">
      <rect>
-      <x>0</x>
-      <y>0</y>
+      <x>20</x>
+      <y>10</y>
       <width>621</width>
       <height>391</height>
      </rect>
     </property>
     <property name="font">
      <font>
+      <family>Arial</family>
+      <pointsize>20</pointsize>
       <bold>true</bold>
      </font>
     </property>
@@ -32,7 +34,7 @@
      <number>-1</number>
     </property>
     <property name="currentIndex">
-     <number>3</number>
+     <number>4</number>
     </property>
     <widget class="QWidget" name="aloitus"/>
     <widget class="QWidget" name="pankkisivu">
@@ -53,6 +55,7 @@
            <property name="font">
             <font>
              <family>Webdings</family>
+             <pointsize>20</pointsize>
              <bold>true</bold>
             </font>
            </property>
@@ -83,6 +86,7 @@
            <property name="font">
             <font>
              <family>Webdings</family>
+             <pointsize>20</pointsize>
              <bold>true</bold>
             </font>
            </property>
@@ -117,6 +121,7 @@
            <property name="font">
             <font>
              <family>Webdings</family>
+             <pointsize>20</pointsize>
              <bold>true</bold>
             </font>
            </property>
@@ -179,6 +184,7 @@
            <property name="font">
             <font>
              <family>Webdings</family>
+             <pointsize>20</pointsize>
              <bold>true</bold>
             </font>
            </property>
@@ -215,6 +221,7 @@
            <property name="font">
             <font>
              <family>Webdings</family>
+             <pointsize>20</pointsize>
              <bold>true</bold>
             </font>
            </property>
@@ -257,44 +264,52 @@
        <rect>
         <x>10</x>
         <y>70</y>
-        <width>253</width>
-        <height>85</height>
+        <width>415</width>
+        <height>169</height>
        </rect>
       </property>
       <layout class="QFormLayout" name="formLayout_3">
        <item row="0" column="0">
-        <widget class="QPushButton" name="pushButton">
+        <widget class="QPushButton" name="OTTO_10E_BT">
          <property name="text">
           <string>10€</string>
          </property>
         </widget>
        </item>
        <item row="0" column="1">
-        <widget class="QPushButton" name="pushButton_3">
+        <widget class="QPushButton" name="OTTO_50E_BT">
          <property name="text">
           <string>50€</string>
          </property>
         </widget>
        </item>
        <item row="1" column="0">
-        <widget class="QPushButton" name="pushButton_2">
-         <property name="text">
-          <string>20€</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="1">
-        <widget class="QPushButton" name="pushButton_4">
+        <widget class="QPushButton" name="OTTO_20E_BT">
          <property name="text">
           <string>100€</string>
          </property>
         </widget>
        </item>
-       <item row="2" column="0">
+       <item row="1" column="1">
+        <widget class="QPushButton" name="OTTO_100E_BT">
+         <property name="text">
+          <string>150€</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QPushButton" name="Nosto_200">
+         <property name="text">
+          <string>200€</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0">
         <widget class="QPushButton" name="OTTO_TAKAISIN">
          <property name="font">
           <font>
            <family>Webdings</family>
+           <pointsize>20</pointsize>
            <bold>false</bold>
           </font>
          </property>
@@ -303,16 +318,20 @@
          </property>
         </widget>
        </item>
-       <item row="2" column="1">
-        <widget class="QLabel" name="label_4">
+       <item row="3" column="1">
+        <widget class="QLabel" name="TAKAISIN_ALOTUKSEEN_LB">
          <property name="font">
           <font>
            <family>Arial</family>
+           <pointsize>20</pointsize>
            <bold>true</bold>
           </font>
          </property>
          <property name="text">
           <string>TAKAISIN ALOITUKSEEN</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
          </property>
         </widget>
        </item>
@@ -325,26 +344,34 @@
        <rect>
         <x>120</x>
         <y>20</y>
-        <width>101</width>
+        <width>241</width>
         <height>41</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <family>Arial</family>
+        <pointsize>20</pointsize>
+        <bold>true</bold>
+       </font>
+      </property>
       <property name="text">
-       <string>TILITAPAHTUMAT</string>
+       <string>TILITAPAHTUMAT:</string>
       </property>
      </widget>
      <widget class="QPushButton" name="TILITAPAHTUMAT_TAKAISIN">
       <property name="geometry">
        <rect>
-        <x>40</x>
-        <y>30</y>
-        <width>75</width>
-        <height>24</height>
+        <x>24</x>
+        <y>23</y>
+        <width>91</width>
+        <height>31</height>
        </rect>
       </property>
       <property name="font">
        <font>
         <family>Webdings</family>
+        <pointsize>20</pointsize>
         <bold>false</bold>
        </font>
       </property>
@@ -352,19 +379,41 @@
        <string>3</string>
       </property>
      </widget>
-    </widget>
-    <widget class="QWidget" name="saldo">
-     <widget class="QLabel" name="label_3">
+     <widget class="QLabel" name="TILITAPAHTUMAT_LABEL">
       <property name="geometry">
        <rect>
-        <x>210</x>
-        <y>200</y>
-        <width>151</width>
-        <height>71</height>
+        <x>90</x>
+        <y>100</y>
+        <width>431</width>
+        <height>231</height>
        </rect>
       </property>
       <property name="text">
+       <string>TextLabel</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="saldo">
+     <widget class="QLabel" name="SALDO_LABEL">
+      <property name="geometry">
+       <rect>
+        <x>130</x>
+        <y>20</y>
+        <width>431</width>
+        <height>241</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>14</pointsize>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
        <string>SALDO</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
       </property>
      </widget>
      <widget class="QPushButton" name="SALDO_TAKAISIN">
@@ -379,12 +428,87 @@
       <property name="font">
        <font>
         <family>Webdings</family>
+        <pointsize>20</pointsize>
         <bold>false</bold>
        </font>
       </property>
       <property name="text">
        <string>3</string>
       </property>
+     </widget>
+     <widget class="QWidget" name="formLayoutWidget_2">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>50</y>
+        <width>591</width>
+        <height>201</height>
+       </rect>
+      </property>
+      <layout class="QFormLayout" name="formLayout_4">
+       <item row="0" column="0">
+        <widget class="QLabel" name="label_7">
+         <property name="font">
+          <font>
+           <family>Arial</family>
+           <pointsize>20</pointsize>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>TILIN SALDO:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLabel" name="label_10">
+         <property name="font">
+          <font>
+           <family>Arial</family>
+           <pointsize>20</pointsize>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::Box</enum>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="label_8">
+         <property name="font">
+          <font>
+           <family>Arial</family>
+           <pointsize>20</pointsize>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>TILILTÄ NOSTETTAVISSA:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QLabel" name="label_11">
+         <property name="font">
+          <font>
+           <family>Arial</family>
+           <pointsize>20</pointsize>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::Box</enum>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </widget>
     </widget>
    </widget>
@@ -395,7 +519,7 @@
      <x>0</x>
      <y>0</y>
      <width>619</width>
-     <height>22</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>

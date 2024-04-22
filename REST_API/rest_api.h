@@ -18,6 +18,7 @@ public:
     void getTransactions();
     void getAccountLogistics();
     void withdrawalOperation(double amount);
+    void resetAll();
 public slots:
 private slots:
     void cardSlot(QNetworkReply *reply);
@@ -30,8 +31,8 @@ signals:
     void connectionError();
     bool cardChecked(bool);
     void loginSuccessful(bool);
-    QJsonObject transactionInfoReceived(QJsonObject);
-    QJsonObject accountLogisticsReceived(QJsonObject);
+    void transactionInfoReceived(QString);
+    void accountLogisticsReceived(QString);
 private:
     QString base_url="http://localhost:3000/";
     QNetworkAccessManager *loginManager;
@@ -41,7 +42,6 @@ private:
     QString card_no;
     QString IBAN;
     QByteArray webtoken;
-    double balance;
 
     void getAndSetAccountIBAN();
     void setcard_no(QString);

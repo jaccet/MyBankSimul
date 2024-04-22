@@ -73,8 +73,8 @@ router.delete('/:idtransaction',function(request, response){
     });
 });
 
-router.post('/withdrawal',function(request,response){
-    transaction.withdrawal(request.body,function(err,result){
+router.post('/withdrawal/:iban_no',function(request,response){
+    transaction.withdrawal(request.params.iban_no,request.body,function(err,result){
         if(err){
             response.send(err);
         } else {

@@ -5,7 +5,7 @@ const transaction={
         return db.query("SELECT * FROM transaction",callback);
     },
     getAllTransactionByIbanJoinCard(card_no,callback){
-        return db.query("select transaction.idtransaction,transaction.type,transaction.date,transaction.amount from card c join account a on c.IBAN_no=a.IBAN_no join transaction on a.IBAN_no=transaction.IBAN_no where card_no=?",[card_no],callback);
+        return db.query("select transaction.idtransaction,transaction.type,transaction.date,transaction.amount from card c join account a on c.IBAN_no=a.IBAN_no join transaction on a.IBAN_no=transaction.IBAN_no where card_no=? order by idtransaction desc limit 5",[card_no],callback);
     },
     getOneTransaction(idtransaction, callback){
         return db.query("SELECT * FROM transaction WHERE idtransaction=?",[idtransaction],callback);
@@ -19,8 +19,8 @@ const transaction={
     deleteTransaction(idtransaction, callback){
         return db.query("DELETE FROM transaction WHERE idtransaction=?",[idtransaction],callback);
     },
-    withdrawal(withdrawalInfo,callback){
-        return db.query("CALL withdrawal(?,?)",[withdrawalInfo.IBAN_no,withdrawalInfo.amount],callback);
+    withdrawal(iban_no,withdrawalInfo,callback){
+        return db.query("CALL withdrawal(?,?)",[iban_no,withdrawalInfo.amount],callback);
     }
 }
 

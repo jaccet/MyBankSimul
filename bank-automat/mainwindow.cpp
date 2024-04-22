@@ -21,6 +21,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(restPtr, SIGNAL(connectionError()),this,SLOT(connectioErrorHandler()));
     connect(restPtr, SIGNAL(transactionInfoReceived(QString)),this,SLOT(transactionInfoReceiver(QString)));
     connect(restPtr, SIGNAL(accountLogisticsReceived(QString)),this,SLOT(accountLogisticsReceiver(QString)));
+    connect(restPtr, SIGNAL(loginSuccessful(bool)),this,SLOT(loginCheck(bool)));
     this->setStyleSheet("background-color: lightblue;");
     QList<QPushButton*> accountButtonList = {ui->LOPETA_BT, ui->OTTO_BT, ui->SALDO_BT, ui->TAKAISIN_BT, ui->TILITAPAHTUMAT_BT, ui->OTTO_TAKAISIN, ui->TILITAPAHTUMAT_TAKAISIN, ui->SALDO_TAKAISIN};
     QList<QPushButton*> ottoButtonList = {ui->OTTO_10E_BT,ui->OTTO_20E_BT,ui->OTTO_50E_BT,ui->OTTO_100E_BT};
@@ -55,7 +56,13 @@ void MainWindow::handleInserCardClick()
     restPtr->checkCard(userid);                 // Pointteri RestAPI:n checkCard functioon
 }
 
-void MainWindow::receiveLogin(bool loginResponse)
+void MainWindow::receiveLogin(QString pinNmr)
+{
+    qDebug() << "numero on : " << pinNmr;
+    restPtr->requestLogin(pinNmr);
+}
+
+void MainWindow::loginCheck(bool loginResponse)
 {
     if (loginResponse == false && ui->stackedWidget->currentIndex() == 0){
         qDebug()<< "Väärin meni";
@@ -77,8 +84,8 @@ void MainWindow::receiveCardCheck(bool cardCheckResult)
         connect(rfidPtr->serialPort, SIGNAL(readyRead()), this,SLOT(handleInserCardClick()));
     }
     else {
-        pinpointer = new pinUI(this,restPtr);
-        connect(pinpointer,SIGNAL(loginResultFromPinUI(bool)),this,SLOT(receiveLogin(bool)));
+        pinpointer = new pinUI(this);
+        connect(pinpointer,SIGNAL(PINFromPinUI(QString)),this,SLOT(receiveLogin(QString)));
         pinpointer->show();
     }
 }

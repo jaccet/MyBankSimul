@@ -30,7 +30,7 @@ signals:
 
 private slots:
     void handleInserCardClick();
-    void receiveLogin(bool);
+    void receiveLogin(QString);
     //RFID
     void receiveCardCheck(bool);
     void accountButtonHandler();
@@ -38,6 +38,7 @@ private slots:
     void connectioErrorHandler();
     void transactionInfoReceiver(QString);
     void accountLogisticsReceiver(QString);
+    void loginCheck(bool);
 
 private:
     Ui::MainWindow *ui;

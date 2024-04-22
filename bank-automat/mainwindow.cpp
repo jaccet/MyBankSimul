@@ -103,6 +103,7 @@ void MainWindow::accountButtonHandler()
     }
     else if(button->objectName()== "OTTO_TAKAISIN"){
         ui->stackedWidget->setCurrentIndex(1);
+
     }
     else if(button->objectName()== "SALDO_TAKAISIN"){
         ui->stackedWidget->setCurrentIndex(1);

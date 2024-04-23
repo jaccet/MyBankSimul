@@ -49,7 +49,7 @@
        <number>-1</number>
       </property>
       <property name="currentIndex">
-       <number>3</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="aloitus"/>
       <widget class="QWidget" name="pankkisivu">
@@ -86,7 +86,7 @@
          <property name="font">
           <font>
            <family>Source Code Pro</family>
-           <pointsize>20</pointsize>
+           <pointsize>16</pointsize>
            <bold>true</bold>
           </font>
          </property>
@@ -135,7 +135,7 @@
          <property name="font">
           <font>
            <family>Source Code Pro</family>
-           <pointsize>20</pointsize>
+           <pointsize>16</pointsize>
            <bold>true</bold>
           </font>
          </property>
@@ -200,7 +200,7 @@
          <property name="font">
           <font>
            <family>Source Code Pro</family>
-           <pointsize>20</pointsize>
+           <pointsize>16</pointsize>
            <bold>true</bold>
           </font>
          </property>
@@ -272,7 +272,7 @@
          <property name="font">
           <font>
            <family>Source Code Pro</family>
-           <pointsize>20</pointsize>
+           <pointsize>16</pointsize>
            <bold>true</bold>
           </font>
          </property>
@@ -330,7 +330,7 @@
          <property name="font">
           <font>
            <family>Source Code Pro</family>
-           <pointsize>20</pointsize>
+           <pointsize>16</pointsize>
            <bold>true</bold>
           </font>
          </property>
@@ -361,6 +361,9 @@
           <bold>true</bold>
          </font>
         </property>
+        <property name="frameShape">
+         <enum>QFrame::Box</enum>
+        </property>
         <property name="text">
          <string>TERVETULOA</string>
         </property>
@@ -373,18 +376,21 @@
        <widget class="QLabel" name="label_5">
         <property name="geometry">
          <rect>
-          <x>9</x>
-          <y>9</y>
+          <x>10</x>
+          <y>20</y>
           <width>611</width>
-          <height>37</height>
+          <height>31</height>
          </rect>
         </property>
         <property name="font">
          <font>
           <family>Source Code Pro</family>
-          <pointsize>22</pointsize>
+          <pointsize>20</pointsize>
           <bold>true</bold>
          </font>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::Box</enum>
         </property>
         <property name="text">
          <string>VALITSE NOSTETTAVA SUMMA</string>
@@ -396,10 +402,10 @@
        <widget class="QFrame" name="frame_3">
         <property name="geometry">
          <rect>
-          <x>10</x>
-          <y>60</y>
+          <x>0</x>
+          <y>110</y>
           <width>611</width>
-          <height>271</height>
+          <height>251</height>
          </rect>
         </property>
         <property name="frameShape">
@@ -412,9 +418,9 @@
          <property name="geometry">
           <rect>
            <x>10</x>
-           <y>130</y>
+           <y>120</y>
            <width>311</width>
-           <height>51</height>
+           <height>41</height>
           </rect>
          </property>
          <property name="text">
@@ -425,9 +431,9 @@
          <property name="geometry">
           <rect>
            <x>10</x>
-           <y>190</y>
+           <y>170</y>
            <width>311</width>
-           <height>51</height>
+           <height>41</height>
           </rect>
          </property>
          <property name="text">
@@ -438,9 +444,9 @@
          <property name="geometry">
           <rect>
            <x>10</x>
-           <y>10</y>
+           <y>20</y>
            <width>311</width>
-           <height>51</height>
+           <height>41</height>
           </rect>
          </property>
          <property name="text">
@@ -453,56 +459,79 @@
            <x>10</x>
            <y>70</y>
            <width>311</width>
-           <height>51</height>
+           <height>41</height>
           </rect>
          </property>
          <property name="text">
           <string>40€</string>
          </property>
         </widget>
-        <widget class="QPushButton" name="OTTO_TAKAISIN">
+        <widget class="QLabel" name="label_7">
          <property name="geometry">
           <rect>
-           <x>430</x>
+           <x>350</x>
            <y>20</y>
-           <width>75</width>
-           <height>51</height>
-          </rect>
-         </property>
-         <property name="font">
-          <font>
-           <family>Webdings</family>
-           <pointsize>20</pointsize>
-           <bold>false</bold>
-          </font>
-         </property>
-         <property name="text">
-          <string>3</string>
-         </property>
-        </widget>
-        <widget class="QLabel" name="TAKAISIN_ALOTUKSEEN_LB">
-         <property name="geometry">
-          <rect>
-           <x>340</x>
-           <y>70</y>
-           <width>261</width>
-           <height>34</height>
+           <width>241</width>
+           <height>191</height>
           </rect>
          </property>
          <property name="font">
           <font>
            <family>Source Code Pro</family>
-           <pointsize>16</pointsize>
-           <bold>true</bold>
+           <pointsize>14</pointsize>
+           <bold>false</bold>
           </font>
          </property>
          <property name="text">
-          <string>TAKAISIN ALOITUKSEEN</string>
+          <string>TextLabel</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
          </property>
         </widget>
+       </widget>
+       <widget class="QPushButton" name="OTTO_TAKAISIN">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>70</y>
+          <width>75</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Webdings</family>
+          <pointsize>20</pointsize>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>3</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="TAKAISIN_ALOTUKSEEN_LB">
+        <property name="geometry">
+         <rect>
+          <x>90</x>
+          <y>70</y>
+          <width>261</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Source Code Pro</family>
+          <pointsize>12</pointsize>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>TAKAISIN ALOITUKSEEN</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+        </property>
        </widget>
       </widget>
       <widget class="QWidget" name="tilitiedot">
@@ -510,9 +539,9 @@
         <property name="geometry">
          <rect>
           <x>10</x>
-          <y>60</y>
-          <width>611</width>
-          <height>271</height>
+          <y>120</y>
+          <width>601</width>
+          <height>251</height>
          </rect>
         </property>
         <property name="frameShape">
@@ -521,74 +550,37 @@
         <property name="frameShadow">
          <enum>QFrame::Raised</enum>
         </property>
-        <widget class="QPushButton" name="TILITAPAHTUMAT_TAKAISIN">
-         <property name="geometry">
-          <rect>
-           <x>430</x>
-           <y>20</y>
-           <width>75</width>
-           <height>51</height>
-          </rect>
-         </property>
-         <property name="font">
-          <font>
-           <family>Webdings</family>
-           <pointsize>20</pointsize>
-           <bold>false</bold>
-          </font>
-         </property>
-         <property name="text">
-          <string>3</string>
-         </property>
-        </widget>
-        <widget class="QLabel" name="label">
-         <property name="geometry">
-          <rect>
-           <x>340</x>
-           <y>70</y>
-           <width>261</width>
-           <height>34</height>
-          </rect>
-         </property>
-         <property name="font">
-          <font>
-           <family>Source Code Pro</family>
-           <pointsize>16</pointsize>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="text">
-          <string>TAKAISIN ALOITUKSEEN</string>
-         </property>
-        </widget>
         <widget class="QLabel" name="TILITAPAHTUMAT_LABEL">
          <property name="geometry">
           <rect>
-           <x>10</x>
-           <y>10</y>
-           <width>321</width>
+           <x>0</x>
+           <y>0</y>
+           <width>611</width>
            <height>251</height>
           </rect>
          </property>
          <property name="font">
           <font>
            <family>Source Code Pro</family>
-           <pointsize>16</pointsize>
+           <pointsize>12</pointsize>
            <bold>false</bold>
           </font>
          </property>
          <property name="text">
           <string>TextLabel</string>
          </property>
+         <property name="alignment">
+          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+         </property>
         </widget>
        </widget>
        <widget class="QLabel" name="label_2">
         <property name="geometry">
          <rect>
-          <x>9</x>
-          <y>10</y>
+          <x>10</x>
+          <y>20</y>
           <width>611</width>
-          <height>34</height>
+          <height>31</height>
          </rect>
         </property>
         <property name="font">
@@ -598,11 +590,54 @@
           <bold>true</bold>
          </font>
         </property>
+        <property name="frameShape">
+         <enum>QFrame::Box</enum>
+        </property>
         <property name="text">
-         <string>TILITAPAHTUMAT:</string>
+         <string>TILITAPAHTUMAT</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="TILITAPAHTUMAT_TAKAISIN">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>70</y>
+          <width>75</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Webdings</family>
+          <pointsize>20</pointsize>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>3</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label">
+        <property name="geometry">
+         <rect>
+          <x>90</x>
+          <y>70</y>
+          <width>261</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Source Code Pro</family>
+          <pointsize>12</pointsize>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>TAKAISIN ALOITUKSEEN</string>
         </property>
        </widget>
       </widget>
@@ -611,9 +646,9 @@
         <property name="geometry">
          <rect>
           <x>10</x>
-          <y>60</y>
+          <y>120</y>
           <width>611</width>
-          <height>271</height>
+          <height>251</height>
          </rect>
         </property>
         <property name="frameShape">
@@ -622,59 +657,19 @@
         <property name="frameShadow">
          <enum>QFrame::Raised</enum>
         </property>
-        <widget class="QLabel" name="label_3">
-         <property name="geometry">
-          <rect>
-           <x>340</x>
-           <y>70</y>
-           <width>261</width>
-           <height>34</height>
-          </rect>
-         </property>
-         <property name="font">
-          <font>
-           <family>Source Code Pro</family>
-           <pointsize>16</pointsize>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="text">
-          <string>TAKAISIN ALOITUKSEEN</string>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="SALDO_TAKAISIN">
-         <property name="geometry">
-          <rect>
-           <x>430</x>
-           <y>20</y>
-           <width>75</width>
-           <height>51</height>
-          </rect>
-         </property>
-         <property name="font">
-          <font>
-           <family>Webdings</family>
-           <pointsize>20</pointsize>
-           <bold>false</bold>
-          </font>
-         </property>
-         <property name="text">
-          <string>3</string>
-         </property>
-        </widget>
         <widget class="QLabel" name="SALDO_LABEL">
          <property name="geometry">
           <rect>
-           <x>10</x>
-           <y>10</y>
-           <width>271</width>
+           <x>0</x>
+           <y>0</y>
+           <width>611</width>
            <height>251</height>
           </rect>
          </property>
          <property name="font">
           <font>
            <family>Source Code Pro</family>
-           <pointsize>16</pointsize>
+           <pointsize>12</pointsize>
            <bold>false</bold>
           </font>
          </property>
@@ -682,9 +677,75 @@
           <string>SALDO</string>
          </property>
          <property name="alignment">
-          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
          </property>
         </widget>
+       </widget>
+       <widget class="QLabel" name="label_6">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>20</y>
+          <width>611</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Source Code Pro</family>
+          <pointsize>20</pointsize>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::Box</enum>
+        </property>
+        <property name="text">
+         <string>SALDO</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="SALDO_TAKAISIN">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>70</y>
+          <width>75</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Webdings</family>
+          <pointsize>20</pointsize>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>3</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_3">
+        <property name="geometry">
+         <rect>
+          <x>90</x>
+          <y>70</y>
+          <width>261</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Source Code Pro</family>
+          <pointsize>12</pointsize>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>TAKAISIN ALOITUKSEEN</string>
+        </property>
        </widget>
       </widget>
      </widget>

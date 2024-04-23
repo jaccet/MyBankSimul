@@ -9,6 +9,10 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    setStyleSheet("background-image: url();");
+    QMovie *bengali = new QMovie(QApplication::applicationDirPath()+"\\pankkialoitus.gif");
+    ui->KUVA_BENGALI->setMovie(bengali);
+    bengali->start();
     this->setAttribute(Qt::WA_DeleteOnClose);
     ui->stackedWidget->setCurrentIndex(0);
     qDebug() << "menee tänne";

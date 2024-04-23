@@ -6,6 +6,7 @@
 #include <QtSerialPort>
 #include <QDebug>
 #include <QMessageBox>
+#include <QMovie>
 
 #include "rest_api.h"
 #include "rifd.h"

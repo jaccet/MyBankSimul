@@ -7,11 +7,13 @@
 #include <QDebug>
 #include <QMessageBox>
 #include <QMovie>
+#include <QTimer>
 
 #include "rest_api.h"
 #include "rifd.h"
 #include "pankkisivu.h"
 #include "pinui.h"
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -40,6 +42,11 @@ private slots:
     void transactionInfoReceiver(QString);
     void accountLogisticsReceiver(QString);
     void loginCheck(bool);
+    // Timerin lohkoja
+    void startTimer();
+    void updateTimer();
+    void stopTimer();
+    void checkRemainingTime();
 
 private:
     Ui::MainWindow *ui;
@@ -48,5 +55,9 @@ private:
     rfid * rfidPtr;
     QByteArray userid;
     REST_API * restPtr;
+    // Timerin osia
+    QTimer * timer;
+    short remainingTime = 30;
+
 };
 #endif // MAINWINDOW_H

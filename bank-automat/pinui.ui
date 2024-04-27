@@ -113,7 +113,8 @@
           <widget class="QPushButton" name="button2">
            <property name="font">
             <font>
-             <family>Franklin Gothic Heavy</family>
+             <family>Segoe UI</family>
+             <kerning>true</kerning>
             </font>
            </property>
            <property name="text">

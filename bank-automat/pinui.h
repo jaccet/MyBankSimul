@@ -2,8 +2,6 @@
 #define PINUI_H
 
 #include <QDialog>
-#include <QTimer>
-#include "rest_api.h"
 
 namespace Ui {
 class pinUI;

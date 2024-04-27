@@ -29,7 +29,6 @@ signals:
 private:
     Ui::pinUI *ui;
     QString starCount,number;
-    void switchFontSize(short);
 };
 
 #endif // PINUI_H

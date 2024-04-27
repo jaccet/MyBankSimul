@@ -7,14 +7,10 @@
 #include <QDebug>
 #include <QMessageBox>
 #include <QMovie>
-<<<<<<< HEAD
-=======
 #include <QTimer>
->>>>>>> main
 
 #include "rest_api.h"
 #include "rifd.h"
-#include "pankkisivu.h"
 #include "pinui.h"
 
 
@@ -53,7 +49,6 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    pankkiSivu * pankkiPtr;
     pinUI * pinpointer;
     rfid * rfidPtr;
     QByteArray userid;

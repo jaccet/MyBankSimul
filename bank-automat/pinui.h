@@ -2,8 +2,6 @@
 #define PINUI_H
 
 #include <QDialog>
-#include <QTimer>
-#include "rest_api.h"
 
 namespace Ui {
 class pinUI;
@@ -29,7 +27,6 @@ signals:
 private:
     Ui::pinUI *ui;
     QString starCount,number;
-    void switchFontSize(short);
 };
 
 #endif // PINUI_H

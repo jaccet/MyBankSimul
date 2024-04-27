@@ -1,13 +1,12 @@
 #include "pinui.h"
 #include "ui_pinui.h"
 
-// Täytyy korjata kun pinui tuhoutuu että RFID portti ei aukea uudelleen.
 pinUI::pinUI(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::pinUI)
 {
     ui->setupUi(this);
-    this->setAttribute(Qt::WA_DeleteOnClose);
+    this->setAttribute(Qt::WA_DeleteOnClose); // Tämä päälle, jotta PinUI-olio tuhoutuu varmasti mikäli PinUI-ikkuna suljetaan käyttäjän toimesta.
     QList<QPushButton*> list = {ui->button1,ui->button2,ui->button3,ui->button4,ui->button5,ui->button6,ui->button7,ui->button8,ui->button9,ui->button0};
     QList<QPushButton*> list2 = {ui->buttonClr,ui->buttonEnter,ui->buttonBck}; // QListit jokaiselle PinUI:n napille, jotta jokaiselle napille ei tarvitse tehdä omaa handleria.
     qDebug() << "pinUI käynnistetty";
@@ -31,11 +30,10 @@ pinUI::~pinUI()
 
 void pinUI::numberClickedHandler() // Jokaisen luvun napin toiminto.
 {
-    switchFontSize(24);
     if(number.size()<4) // QString-tyyppinen muuttuja number vastaa PIN-luvun ylläpitämisestä. If-lausekkeella varmistetaan tässä se,
     {                   // että number-muuttujan stringin pituus ei voi mennä neljää suuremmaksi.
-        QPushButton *button = qobject_cast<QPushButton*>(sender());
-        qDebug() << button->objectName();
+        QPushButton *button = qobject_cast<QPushButton*>(sender()); // Yhdistetään käyttäjän painettu nappi button-pointeriin
+        qDebug() << button->objectName(); // ...ja tällä voidaan katsoa, että minkä luvun nappi päätyi painetuksi.
         number+=button->objectName().at(6); // Tallennetaan number-lukuun käyttäjän syöttämä PIN-luku. objectName().at(6) ottaa jokaisen napin nimen viimeisen kirjaimen, joka on tässä tapauksessa luku.
         qDebug() << "syötetty PIN-luku : " << number << Qt::endl;   // Esim. objectName = button5. "5" on kuudes "kirjain" nappiobjektin nimessä, joten tämän perusteella luku 5 lisätään number-muuttujaan.
         starCount+="* "; // Luvun lisäyksen jälkeen starCount-nimiseen QStringiin lisätään tähti, joka lopulta siirtyy PinUI:n ruudulle, jotta käyttäjän syöttämä luku pysyy salaisena.
@@ -71,15 +69,7 @@ void pinUI::clrEntBckClickedHandler() // Luvun muuttamisen, ja Enterin toiminnot
     {
         qDebug() << "enteriä painettu";
         emit PINFromPinUI(number);
-        this->close();        // Käyttäjän painaessa enteriä kutsutaan REST API:n requestLogin-funktiota number-muuttujan avulla, joka lähetetään REST API:in verrattavaksi. // Tämä johtaa myös loginHandler-funktioon, joka on alempana.
+        this->close();        // Enteriä painettaessa käyttäjän syöttämä luku lähetetään MainWindowiin PINFromPinUI-signaalin avulla, jonka jälkeen pinUI-ikkuna suljetaan.
     }
-}
-
-void pinUI::switchFontSize(short fontSize) // Yksinkertainen funktio ruudun fontin koon vaihtamiselle.
-{
-    QFont font;
-    font.setPointSize(fontSize);
-    ui->infoScreen->setFont(font);
-    qDebug() << "fonttia muutettu";
 }
 

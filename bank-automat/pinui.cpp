@@ -7,6 +7,7 @@ pinUI::pinUI(QWidget *parent) :
 {
     ui->setupUi(this);
     this->setAttribute(Qt::WA_DeleteOnClose); // Tämä päälle, jotta PinUI-olio tuhoutuu varmasti mikäli PinUI-ikkuna suljetaan käyttäjän toimesta.
+    setWindowFlags(Qt::Window | Qt::WindowTitleHint | Qt::CustomizeWindowHint); // Jotta käyttäjä ei voi painella ikkunan nappeja, kuten ruksia.
     QList<QPushButton*> list = {ui->button1,ui->button2,ui->button3,ui->button4,ui->button5,ui->button6,ui->button7,ui->button8,ui->button9,ui->button0};
     QList<QPushButton*> list2 = {ui->buttonClr,ui->buttonEnter,ui->buttonBck}; // QListit jokaiselle PinUI:n napille, jotta jokaiselle napille ei tarvitse tehdä omaa handleria.
     qDebug() << "pinUI käynnistetty";
